@@ -1,38 +1,38 @@
-#include "XX.h"
+#include "Arc.h"
 
 static const string TAG = "ZORK: ";
 
-XX::XX()
+Arc::Arc()
 {
 this->x = DUMMYX;
 this->y = DUMMYY;
 }
 
-XX::~XX()
+Arc::~Arc()
 {
 }
 
-int XX::getX()
+int Arc::getX()
 {
 return this->x;
 }
 
-int XX::getY()
+int Arc::getY()
 {
 return this->y;
 }
 
-void XX::setX(int value)
+void Arc::setX(int value)
 {
 this->x = value;
 }
 
-void XX::setY(int value)
+void Arc::setY(int value)
 {
 this->y = value;
 }
 
-bool XX::equals(XX that)
+bool Arc::equals(Arc that)
 {
 if((this->x == that.getX()) &&
 (this->y == that.getY()))
@@ -43,12 +43,12 @@ return true;
 return false;
 }
 
-bool XX::z()
+bool Arc::z()
 {
 return (this->x = this->y);
 }
 
-string XX::toString()
+string Arc::toString()
 {
 string s = "";
 s += "(" + Utils::Format(this->getX(), 3) + " -> ";

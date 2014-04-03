@@ -7,18 +7,18 @@
 #define DUMMYX -1
 #define DUMMYY -2
 
-class XX
+class Arc
 {
 public:
-  XX();
-  virtual ~XX();
+  Arc();
+  virtual ~Arc();
 
   int getX();
   int getY();
   void setX(int value);
   void setY(int value);
 
-  bool equals(XX that);
+  bool equals(Arc that);
   bool z();
 
   string toString();

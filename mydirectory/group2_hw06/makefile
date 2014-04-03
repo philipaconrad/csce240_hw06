@@ -4,12 +4,12 @@ UTILS = ../../Utilities
 
 M = Main.o
 UF = UnionFind.o
-XX = XX.o
+Arc = Arc.o
 S = Scanner.o
 U = Utils.o
 
-Aprog: $(M) $(UF) $(XX) $(S) $(U)
-	$(GPP) -o Aprog $(M) $(UF) $(XX) $(S) $(U)
+Aprog: $(M) $(UF) $(Arc) $(S) $(U)
+	$(GPP) -o Aprog $(M) $(UF) $(Arc) $(S) $(U)
 
 Main.o: Main.h Main.cpp
 	$(GPP) -o Main.o -c -DEBUG Main.cpp
@@ -17,8 +17,8 @@ Main.o: Main.h Main.cpp
 UnionFind.o: UnionFind.h UnionFind.cpp
 	$(GPP) -o UnionFind.o -c UnionFind.cpp
 
-XX.o: XX.h XX.cpp
-	$(GPP) -o XX.o -c XX.cpp
+Arc.o: Arc.h Arc.cpp
+	$(GPP) -o Arc.o -c Arc.cpp
 
 Scanner.o: $(UTILS)/Scanner.h $(UTILS)/Scanner.cpp
 	$(GPP) -o Scanner.o -c $(UTILS)/Scanner.cpp

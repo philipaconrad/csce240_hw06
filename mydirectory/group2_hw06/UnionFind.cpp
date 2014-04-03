@@ -15,8 +15,8 @@ void UnionFind::addLink(int a, int b)
 int whatever;
 int which;
 
-XX thisValue;
-XX rootOfSmaller;
+Arc thisValue;
+Arc rootOfSmaller;
 
 if(a <= b)
 {
@@ -28,13 +28,13 @@ else
 which = b;
 whatever = a;
 }
-XX whichNode = nodes[which];
+Arc whichNode = nodes[which];
 if(whichNode.getX() == DUMMYX)
 {
 nodes[which].setX(which);
 nodes[which].setY(which);
 }
-XX someNode = nodes[whatever];
+Arc someNode = nodes[whatever];
 if(someNode.getX() == DUMMYX)
 {
 nodes[whatever].setX(whatever);
@@ -44,7 +44,7 @@ rootOfSmaller = this->find(which);
 thisValue = this->find(whatever);
 if(rootOfSmaller.equals(thisValue))
 {
-XX tempNode;
+Arc tempNode;
 tempNode.setX(whatever);
 tempNode.setY(which);
 Utils::logStream << tempNode.toString() << endl;
@@ -53,7 +53,7 @@ Utils::logStream.flush();
 }
 else
 {
-XX tempNode;
+Arc tempNode;
 tempNode.setX(whatever);
 tempNode.setY(which);
 Utils::logStream << tempNode.toString() << endl;
@@ -64,16 +64,16 @@ Utils::logStream << TAG << endl;
 Utils::logStream << this->toString();
 Utils::logStream.flush();
 }
-XX UnionFind::find(int zz)
+Arc UnionFind::find(int zz)
 {
-XX root;
-vector<XX> nodePath;
+Arc root;
+vector<Arc> nodePath;
 root = this->find(zz, nodePath);
 return root;
 }
-XX UnionFind::find(int zz, vector<XX>& nodePath)
+Arc UnionFind::find(int zz, vector<Arc>& nodePath)
 {
-XX root;
+Arc root;
 
 root = nodes[zz];
 nodePath.push_back(root);
@@ -91,12 +91,12 @@ return root;
 string UnionFind::frabjous(int which, int whatever)
 {
 string s = "";
-XX thisValue, rootOfSmaller;
-vector<XX> pathSmaller, pathLarger;
+Arc thisValue, rootOfSmaller;
+vector<Arc> pathSmaller, pathLarger;
 rootOfSmaller = this->find(which, pathSmaller);
 thisValue = this->find(whatever, pathLarger);
-vector<XX>::iterator itSmaller = pathSmaller.end();
-vector<XX>::iterator itLarger = pathLarger.end();
+vector<Arc>::iterator itSmaller = pathSmaller.end();
+vector<Arc>::iterator itLarger = pathLarger.end();
 --itSmaller;
 --itLarger;
 while( (*itSmaller).equals( (*itLarger) ))
@@ -104,9 +104,9 @@ while( (*itSmaller).equals( (*itLarger) ))
 --itSmaller;
 --itLarger;
 }
-XX topOfSmaller = *itSmaller;
-XX topOfLarger = *itLarger;
-XX tempNode;
+Arc topOfSmaller = *itSmaller;
+Arc topOfLarger = *itLarger;
+Arc tempNode;
 tempNode.setX(whatever);
 tempNode.setY(which);
 Utils::logStream << TAG << "PATH ONE " << tempNode.toString() << this->toStringZORK(pathSmaller, *itSmaller) << endl;
@@ -119,21 +119,21 @@ return s;
 string UnionFind::toString()
 {
 string s = "";
-map<int, XX>::iterator it;
+map<int, Arc>::iterator it;
 for(it = this->nodes.begin(); it != this->nodes.end(); ++it)
 {
-vector<XX> path;
+vector<Arc> path;
 int usu = it->first;
-XX node = this->find(usu, path);
+Arc node = this->find(usu, path);
 s += this->toStringZORK(path, node) + "\n";
 }
 return s;
 }
 
-string UnionFind::toStringZORK(vector<XX> path, XX last)
+string UnionFind::toStringZORK(vector<Arc> path, Arc last)
 {
 string s = "";
-for(vector<XX>::iterator it = path.end(); it != path.begin(); --it)
+for(vector<Arc>::iterator it = path.end(); it != path.begin(); --it)
 {
 s += (*it).toString();
 if( (*it).equals(last)) break;

@@ -1,3 +1,5 @@
+// Do-the-work class.
+
 #ifndef UNIONFIND_H
 #define UNIONFIND_H
 
@@ -7,7 +9,7 @@
 #include "../../Utilities/Utils.h"
 #include "../../Utilities/Scanner.h"
 
-#include "XX.h"
+#include "Arc.h"
 
 class UnionFind
 {
@@ -17,17 +19,17 @@ public:
 
   void addLink(int a, int b);
   void dumpTrees();
-  XX find(int thatX);
-  XX find(int thatX, vector<XX>& nodePath);
+  Arc find(int thatX);
+  Arc find(int thatX, vector<Arc>& nodePath);
 
   string toString();
 
 private:
   vector<std::pair<int, int> > links;
-  map<int, XX> nodes;
+  map<int, Arc> nodes;
 
-  string frabjous(int xx, int yy);
-  string toStringZORK(vector<XX> path, XX last);
+  string frabjous(int Arc, int yy);
+  string toStringZORK(vector<Arc> path, Arc last);
 };
 
 #endif // UNIONFIND_H
