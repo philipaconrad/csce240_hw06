@@ -3,7 +3,8 @@
  *
  * Author/copyright:  Duncan Buell. All rights reserved.
  * Date: 12 January 2014
- *
+ * Used by: Allan Bates, Phillip Conrad, Janice Neighbor, 
+ * William Warren
 **/
 
 #include "Main.h"

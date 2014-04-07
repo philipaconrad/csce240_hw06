@@ -1,4 +1,11 @@
-// Do-the-work class.
+/****************************************************************
+ * Header for the 'UnionFind' class.
+ *
+ * Author/copyright:  Duncan Buell
+ * Date: 24 April 2014
+ * Used by: Allan Bates, Phillip Conrad, Janice Neighbor, 
+ * William Warren
+**/// Do-the-work class.
 
 #ifndef UNIONFIND_H
 #define UNIONFIND_H
@@ -13,17 +20,27 @@
 
 class UnionFind
 {
+
 public:
+
+/****************************************************************
+ * Constructors and destructors for the class. 
+**/
   UnionFind();
   virtual ~UnionFind();
 
+/****************************************************************
+ * General functions.
+**/
   void addLink(int a, int b);
   void dumpTrees();
   Arc find(int thatX);
   Arc find(int thatX, vector<Arc>& nodePath);
 
   string toString();
-
+/****************************************************************
+ * Private functions.
+**/
 private:
   vector<std::pair<int, int> > links;
   map<int, Arc> nodes;
