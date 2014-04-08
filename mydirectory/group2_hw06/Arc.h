@@ -33,7 +33,7 @@ public:
   void setX(int value);
   void setY(int value);
 
-  bool equals(Arc that);
+  bool equals(Arc  arc);
   bool z();
 
   string toString();
