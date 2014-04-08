@@ -6,6 +6,7 @@
  * Used by: Allan Bates, Phillip Conrad, Janice Neighbor, 
  * William Warren
 **/
+
 #ifndef X_H
 #define X_H
 
@@ -17,33 +18,34 @@
 
 class Arc
 {
+
 public:
-
 /****************************************************************
- * Constructors and destructors for the class. 
+ * Constructors and destructors. 
 **/
-  Arc();
-  virtual ~Arc();
-
+    Arc();
+    virtual ~Arc();
+    
 /****************************************************************
  * General functions.
 **/
-  int getX();
-  int getY();
-  void setX(int value);
-  void setY(int value);
+    int getX();
+    int getY();
+    
+    void setX(int value);
+    void setY(int value);
+    
+    bool equals(Arc that);
+    bool z();
 
-  bool equals(Arc that);
-  bool z();
-
-  string toString();
-/****************************************************************
- * General private variables.
-**/
+    string toString();
+    
 private:
-  int x;
-  int y;
-
+/****************************************************************
+ * Private variables.
+**/
+    int x;
+    int y;
 };
 
 #endif // X_H
