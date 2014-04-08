@@ -1,14 +1,16 @@
 /****************************************************************
- *'Arc' class.
+ * 'Arc' class.
  *
  * Author/copyright:  Duncan Buell
  * Date: 24 April 2014
  * Used by: Allan Bates, Phillip Conrad, Janice Neighbor, 
  * William Warren
 **/
+
 #include "Arc.h"
 
 static const string TAG = "ZORK: ";
+
 /****************************************************************
  * Constructor.
 **/
