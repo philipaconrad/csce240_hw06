@@ -48,7 +48,7 @@ Arc whichNode = nodes[secondNode];
 if(whichNode.getX() == DUMMYX)
 {
 nodes[secondNode].setX(secondNode);
-nodes[secondNode].etY(secondNode);
+nodes[secondNode].setY(secondNode);
 }
 Arc someNode = nodes[ firstNode];
 if(someNode.getX() == DUMMYX)
@@ -74,7 +74,7 @@ tempNode.setX(firstNode);
 tempNode.setY(secondNode);
 Utils::logStream << tempNode.toString() << endl;
 Utils::logStream.flush();
-nodes[whatever].setY(secondNode);
+nodes[firstNode].setY(secondNode);
 }
 Utils::logStream << TAG << endl;
 Utils::logStream << this->toString();

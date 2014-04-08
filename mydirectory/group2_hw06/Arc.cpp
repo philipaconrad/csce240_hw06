@@ -74,7 +74,7 @@ void Arc::setY(int value)
 **/
 bool Arc::equals(Arc arc)
 {
-    if((this->x == that.getX()) && (this->y == that.getY()))
+    if((this->x == arc.getX()) && (this->y == arc.getY()))
     {
         return true;
     }
@@ -90,7 +90,7 @@ bool Arc::equals(Arc arc)
 **/
 bool Arc::z()
 {
-    return (this->x= = this->y);
+    return (this->x == this->y);
 }
 /****************************************************************
  * Function for returning a 'toString' of the data in the class.
