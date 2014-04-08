@@ -1,15 +1,31 @@
-#include "UnionFind.h"
+/****************************************************************
+ * Header for the 'UnionFind' class.
+ *
+ * Author/copyright:  Duncan Buell
+ * Date: 24 April 2014
+ * Used by: Allan Bates, Phillip Conrad, Janice Neighbor, 
+ * William Warren
+**/#include "UnionFind.h"
 
 static const string TAG = "UnionFind: ";
-
+/****************************************************************
+ * Constructor.
+**/
 UnionFind::UnionFind()
 {
 }
-
+/****************************************************************
+ * Destructor.
+**/
 UnionFind::~UnionFind()
 {
 }
-
+/****************************************************************
+ * Function add links and do voodoo magic.
+ *
+ * Returns:
+ *   none
+**/
 void UnionFind::addLink(int a, int b)
 {
 int whatever;
@@ -64,6 +80,12 @@ Utils::logStream << TAG << endl;
 Utils::logStream << this->toString();
 Utils::logStream.flush();
 }
+/****************************************************************
+ * Function that finds the holy grail.
+ *
+ * Returns:
+ *   root
+**/
 Arc UnionFind::find(int zz)
 {
 Arc root;
@@ -71,6 +93,11 @@ vector<Arc> nodePath;
 root = this->find(zz, nodePath);
 return root;
 }
+/****************************************************************
+ * Function that finds root and places in vector.
+ * Returns:
+ *   root
+**/
 Arc UnionFind::find(int zz, vector<Arc>& nodePath)
 {
 Arc root;
@@ -88,6 +115,12 @@ while(root.getX() != root.getY())
 
 return root;
 }
+/****************************************************************
+ * Function that returns string data of UnionFind.
+ *
+ * Returns:
+ *   string value.
+**/
 string UnionFind::frabjous(int which, int whatever)
 {
 string s = "";
@@ -115,7 +148,12 @@ Utils::logStream << TAG << "PATH TWO " << this->toStringZORK(pathLarger, *itLarg
 Utils::logStream.flush();
 return s;
 }
-
+/****************************************************************
+ * Function for returning a 'toString' of the data in the class.
+ * Here we return vector of the zork whatever.
+ * Returns:
+ *   string of ZORK data.
+**/
 string UnionFind::toString()
 {
 string s = "";
@@ -129,7 +167,12 @@ s += this->toStringZORK(path, node) + "\n";
 }
 return s;
 }
-
+/****************************************************************
+ * Function for returning a 'toString' of the data in the class.
+ * Here we return vector of the zork whatever.
+ * Returns:
+ *   string of ZORK data.
+**/
 string UnionFind::toStringZORK(vector<Arc> path, Arc last)
 {
 string s = "";

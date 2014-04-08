@@ -2,8 +2,9 @@
  * Header file for Homework 6, the union-find algorithm.
  *
  * Author/copyright:  Duncan Buell
- * Date: 12 January 2014
- *
+ * Date: 24 April 2014
+ * Used by: Allan Bates, Phillip Conrad, Janice Neighbor, 
+ * William Warren
 **/
 #ifndef MAIN_H
 #define MAIN_H
