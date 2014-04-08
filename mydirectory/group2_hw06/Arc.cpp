@@ -72,7 +72,7 @@ void Arc::setY(int value)
  * Returns:
  *   boolean value
 **/
-bool Arc::equals(Arc that)
+bool Arc::equals(Arc arc)
 {
     if((this->x == that.getX()) && (this->y == that.getY()))
     {
