@@ -8,7 +8,6 @@
 **/
 #include "Arc.h"
 
-static const string TAG = "ZORK: ";
 /****************************************************************
  * Constructor.
 **/
@@ -91,7 +90,7 @@ bool Arc::equals(Arc that)
 **/
 bool Arc::z()
 {
-    return (this->x = this->y);
+    return (this->x= = this->y);
 }
 /****************************************************************
  * Function for returning a 'toString' of the data in the class.
