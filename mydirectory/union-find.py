@@ -20,15 +20,11 @@ arcList = [
 class Node:
     def __init__(self, ID):
         self.id = ID
-        self.ein  = []
-        self.eout = []
+        self.edges = []
     
     def __repr__(self):
         out = "\nArc("+str(self.id)+")\n"
-        out += " - in:  "
-        out += str(self.ein)+"\n"
-        out += " - out: "
-        out += str(self.eout)
+        out += " - edges: "+str(self.edges)
         return out
 
 
@@ -48,9 +44,13 @@ def build(arcs):
     for arc in arcs:
         for node in out:
             if arc[0] == node.id:
-                node.eout.append(arc[1])
+                node.edges.append(arc[1])
+                node.edges.append(arc[1])
+                node.edges.sort()
             elif arc[1] == node.id:
-                node.ein.append(arc[0])
+                node.edges.append(arc[1])
+                node.edges.append(arc[1])
+                node.edges.sort()
     return out
         
 
@@ -61,11 +61,12 @@ def find(nodes, ID):
     for node in nodes:
         if node.id == ID:
             #found the root!
-            if node.id in node.eout:
+            node.edges.sort()
+            if node.id == node.edges[0]:
                 return node.id
             else:
-                #print "recursing "+str(node.id)+" going to "+str(node.eout[0])
-                return find(nodes, node.eout[0])
+                #print "recursing "+str(node.id)+" going to "+str(node.edges[0])
+                return find(nodes, node.edges[0])
 
 
 #Used to dump cycles to output.
@@ -75,19 +76,20 @@ def verbose_find(nodes, ID):
     for node in nodes:
         if node.id == ID:
             #found the root!
-            if node.id in node.eout:
+            node.edges.sort()
+            if node.id == node.edges[0]:
                 return str((node.id, node.id))
             else:
                 out = ""
-                out += str((node.id, node.eout[0])) #arc from here to next node
-                out += verbose_find(nodes, node.eout[0]) #future arcs
+                out += str((node.id, node.edges[0])) #arc from here to next node
+                out += verbose_find(nodes, node.edges[0]) #future arcs
                 return out
 
 
 def union(nodes, arc):
     rootA = find(nodes, arc[0])
     rootB = find(nodes, arc[1])
-    if rootA != rootB:
+    if rootA == rootB:
         print "Detected cycle when trying to add "+str(arc)
         print "Cycle (a, b) is:"
         print " - From a: " + verbose_find(nodes, arc[0])
@@ -103,24 +105,27 @@ def union(nodes, arc):
 
         if arc[0] not in ids:
             newNode = Node(arc[0])
-            newNode.eout.append(arc[1]) #add outbound edge
+            newNode.edges.append(arc[1]) #add outbound edge
+            node.edges.sort()
             nodes.append(newNode)
         elif arc[0] in ids:
             #grab desired node:
             for node in nodes:
                 if node.id == arc[0]:
-                    node.eout.append(arc[1]) #add outbound edge
+                    node.edges.append(arc[1]) #add outbound edge
+                    node.edges.sort()
 
         if arc[1] not in ids:
             newNode = Node(arc[1])
-            newNode.ein.append(arc[0]) #add inbound edge
-            newNode.eout.append(arc[1]) #add necessary root for self.
+            newNode.edges.append(arc[0]) #add inbound edge
+            newNode.edges.append(arc[1]) #add necessary root for self.
+            node.edges.sort()
             nodes.append(newNode)
         elif arc[1] in ids:
             #grab desired node:
             for node in nodes:
                 if node.id == arc[1]:
-                    node.ein.append(arc[0]) #add inbound edge
+                    node.edges.append(arc[0]) #add inbound edge
     return nodes
 
 
@@ -135,14 +140,15 @@ if __name__ == '__main__':
     
     print "TEST: FIND ROOT OF 7\n"
     print verbose_find(nodeList, 7)
+    print verbose_find(nodeList, 8)
 
     print "\n\n\n"
 
     print "TEST: DETECT KNOWN CYCLE\n"
-    union(nodeList, (7, 8))
-    union(nodeList, (3, 8))
+    nodeList2 = union(nodeList, (3, 8)) #add arc (8, 3)
+    union(nodeList2, (7, 8)) #cycle detected!
 
     print "\n\n\n"
 
     print "TEST: UNION A NON-CYCLIC ARC\n"
-    print union(nodeList, (5,5))
+    print union(nodeList, (5, 2))
