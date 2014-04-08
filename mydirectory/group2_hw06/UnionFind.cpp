@@ -28,53 +28,53 @@ UnionFind::~UnionFind()
 **/
 void UnionFind::addLink(int a, int b)
 {
-int whatever;
-int which;
+int firstNode;
+int secondNode;
 
 Arc thisValue;
 Arc rootOfSmaller;
 
 if(a <= b)
 {
-which = a;
-whatever = b;
+secondNode = a;
+firstNode = b;
 }
 else
 {
-which = b;
-whatever = a;
+secondNode = b;
+firstNode = a;
 }
-Arc whichNode = nodes[which];
+Arc whichNode = nodes[secondNode];
 if(whichNode.getX() == DUMMYX)
 {
-nodes[which].setX(which);
-nodes[which].setY(which);
+nodes[secondNode].setX(secondNode);
+nodes[secondNode].etY(secondNode);
 }
-Arc someNode = nodes[whatever];
+Arc someNode = nodes[ firstNode];
 if(someNode.getX() == DUMMYX)
 {
-nodes[whatever].setX(whatever);
-nodes[whatever].setY(whatever);
+nodes[firstNode].setX(firstNode);
+nodes[firstNode].setY(firstNode);
 }
-rootOfSmaller = this->find(which);
-thisValue = this->find(whatever);
+rootOfSmaller = this->find(secondNode);
+thisValue = this->find(firstNode);
 if(rootOfSmaller.equals(thisValue))
 {
 Arc tempNode;
-tempNode.setX(whatever);
-tempNode.setY(which);
+tempNode.setX(firstNode);
+tempNode.setY(secondNode);
 Utils::logStream << tempNode.toString() << endl;
-Utils::logStream << this->frabjous(which, whatever) << endl;
+Utils::logStream << this->frabjous(secondNode, firstNode) << endl;
 Utils::logStream.flush();
 }
 else
 {
 Arc tempNode;
-tempNode.setX(whatever);
-tempNode.setY(which);
+tempNode.setX(firstNode);
+tempNode.setY(secondNode);
 Utils::logStream << tempNode.toString() << endl;
 Utils::logStream.flush();
-nodes[whatever].setY(which);
+nodes[whatever].setY(secondNode);
 }
 Utils::logStream << TAG << endl;
 Utils::logStream << this->toString();
