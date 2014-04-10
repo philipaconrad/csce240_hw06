@@ -16,6 +16,12 @@ Arc::Arc()
     this->x = DUMMYX;
     this->y = DUMMYY;
 }
+
+Arc::Arc(int a, int b)
+{
+    this->x = a;
+    this->y = b;
+}
 /****************************************************************
  * Destructor.
 **/

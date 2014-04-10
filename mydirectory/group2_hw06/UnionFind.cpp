@@ -36,46 +36,55 @@ Arc rootOfSmaller;
 
 if(a <= b)
 {
-secondNode = a;
-firstNode = b;
+  secondNode = a;
+  firstNode = b;
 }
+
 else
 {
-secondNode = b;
-firstNode = a;
+  secondNode = b;
+  firstNode = a;
 }
+
 Arc whichNode = nodes[secondNode];
+
 if(whichNode.getX() == DUMMYX)
 {
-nodes[secondNode].setX(secondNode);
-nodes[secondNode].setY(secondNode);
+  nodes[secondNode].setX(secondNode);
+  nodes[secondNode].setY(secondNode);
 }
+
 Arc someNode = nodes[ firstNode];
+
 if(someNode.getX() == DUMMYX)
 {
-nodes[firstNode].setX(firstNode);
-nodes[firstNode].setY(firstNode);
+  nodes[firstNode].setX(firstNode);
+  nodes[firstNode].setY(firstNode);
 }
+
 rootOfSmaller = this->find(secondNode);
 thisValue = this->find(firstNode);
+
 if(rootOfSmaller.equals(thisValue))
 {
-Arc tempNode;
-tempNode.setX(firstNode);
-tempNode.setY(secondNode);
-Utils::logStream << tempNode.toString() << endl;
-Utils::logStream << this->frabjous(secondNode, firstNode) << endl;
-Utils::logStream.flush();
+  Arc tempNode;
+  tempNode.setX(firstNode);
+  tempNode.setY(secondNode);
+  Utils::logStream << tempNode.toString() << endl;
+  Utils::logStream << this->frabjous(secondNode, firstNode) << endl;
+  Utils::logStream.flush();
 }
+
 else
 {
-Arc tempNode;
-tempNode.setX(firstNode);
-tempNode.setY(secondNode);
-Utils::logStream << tempNode.toString() << endl;
-Utils::logStream.flush();
-nodes[firstNode].setY(secondNode);
+  Arc tempNode;
+  tempNode.setX(firstNode);
+  tempNode.setY(secondNode);
+  Utils::logStream << tempNode.toString() << endl;
+  Utils::logStream.flush();
+  nodes[firstNode].setY(secondNode);
 }
+
 Utils::logStream << TAG << endl;
 Utils::logStream << this->toString();
 Utils::logStream.flush();
@@ -89,8 +98,20 @@ Utils::logStream.flush();
 Arc UnionFind::find(int zz)
 {
 Arc root;
-vector<Arc> nodePath;
-root = this->find(zz, nodePath);
+map<int, Arc>::iterator iter;
+int index;
+
+for(iter = nodes.begin(); iter != nodes.end(); ++iter)
+{
+    index = (iter->first);
+    if(index == zz)
+    {
+        root = nodes[index];
+    }
+}
+
+//vector<Arc> nodePath;
+//root = this->find(zz, nodePath);
 return root;
 }
 /****************************************************************

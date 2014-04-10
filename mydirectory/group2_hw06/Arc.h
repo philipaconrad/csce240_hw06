@@ -23,6 +23,7 @@ public:
  * Constructors and destructors for the class. 
 **/
   Arc();
+  Arc(int a, int b);
   virtual ~Arc();
 
 /****************************************************************
@@ -37,6 +38,10 @@ public:
   bool z();
 
   string toString();
+/****************************************************************
+ * Overloaded 'friend' operators.
+**/
+friend ostream& operator <<(ostream& outputStream, const Arc& arc);
 /****************************************************************
  * General private variables.
 **/
