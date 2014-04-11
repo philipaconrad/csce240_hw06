@@ -46,7 +46,8 @@ public:
 private:
   vector<std::pair<int, int> > links;
   map<int, Arc> nodes;
-
+  map<int, Node> theNodes;
+  
   string frabjous(int Arc, int yy);
   string toStringZORK(vector<Arc> path, Arc last);
 };
