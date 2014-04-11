@@ -137,6 +137,24 @@ while(root.getX() != root.getY())
 
 return root;
 }
+
+/****************************************************************
+* The find function should return an arc based on matching the id
+* of a node to the nodes within theNodes map.
+**/
+Arc UnionFind::find(map<int, Node> theNodes, int nodeID)
+{
+  
+}
+/****************************************************************
+* The union function makes an arc based off of any relative edges 
+* between the nodes. 
+*
+**/
+void UnionFind::union(map<int, Node> theNodes, tuple<int, int> edges)
+{
+  
+}
 /****************************************************************
 * Function that returns string data of UnionFind.
 *
