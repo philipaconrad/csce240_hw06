@@ -12,11 +12,13 @@
 
 #include <map>
 #include <vector>
+#include <tuple>
 
 #include "../../Utilities/Utils.h"
 #include "../../Utilities/Scanner.h"
 
 #include "Arc.h"
+#include "Node.h"
 
 class UnionFind
 {
@@ -36,7 +38,9 @@ public:
   void dumpTrees();
   Arc find(int thatX);
   Arc find(int thatX, vector<Arc>& nodePath);
-
+  Arc find(map<int, Node> nodes, int nodeId);
+  Arc union(map<int, Node> nodes, tuple<int, int> edges);
+ 
   string toString();
 /****************************************************************
  * Private functions.
@@ -45,6 +49,8 @@ private:
   vector<std::pair<int, int> > links;
   map<int, Arc> nodes;
 
+  map<int, Node> theNodes;
+ 
   string frabjous(int Arc, int yy);
   string toStringZORK(vector<Arc> path, Arc last);
 };
