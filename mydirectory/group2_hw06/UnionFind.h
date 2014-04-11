@@ -12,12 +12,13 @@
 
 #include <map>
 #include <vector>
+#include <tuple>
 
 #include "../../Utilities/Utils.h"
 #include "../../Utilities/Scanner.h"
 
 #include "Arc.h"
-
+#include "Node.h"
 class UnionFind
 {
 
@@ -36,7 +37,8 @@ public:
   void dumpTrees();
   Arc find(int thatX);
   Arc find(int thatX, vector<Arc>& nodePath);
-
+  Arc find(map<int, Node> theNodes, int nodeID);
+  Arc union(map<int, Node> theNodes, tuple<int, int> edges);
   string toString();
 /****************************************************************
  * Private functions.
