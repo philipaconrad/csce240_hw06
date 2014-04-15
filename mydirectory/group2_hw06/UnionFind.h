@@ -26,27 +26,30 @@ public:
     UnionFind();
     virtual ~UnionFind();
 
+
 /****************************************************************
  * General functions.
 **/
-    void addLink(int a, int b);
+    void addArc(const int a, const int b);
+    bool isArcUnique(const Arc arcToAdd);
     void dumpTrees();
-    
-    Arc find(int thatX);
-    Arc find(int thatX, vector<Arc>& nodePath);
+
+    //Arc find(int startNodeID);
+    //Arc find(int startNodeID, vector<Arc>& nodePath); //Not needed yet.
 
     string toString();
-    
+
+
 private:
 /****************************************************************
  * Private functions.
 **/
-    vector<std::pair<int, int> > links;
+    vector<Arc> arcs;
     
     map<int, Arc> nodes;
 
-    string frabjous(int Arc, int yy);
-    string toStringZORK(vector<Arc> path, Arc last);
+    //string frabjous(int Arc, int yy);
+    //string toStringZORK(vector<Arc> path, Arc last);
 };
 
 #endif // UNIONFIND_H

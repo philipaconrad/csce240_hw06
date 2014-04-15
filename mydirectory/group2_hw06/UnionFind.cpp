@@ -11,100 +11,68 @@
 
 static const string TAG = "UnionFind: ";
 
+
 /****************************************************************
  * Constructor.
 **/
 UnionFind::UnionFind()
 {
 }
+
+
 /****************************************************************
  * Destructor.
 **/
 UnionFind::~UnionFind()
 {
 }
+
+
 /****************************************************************
  * Function add links and do voodoo magic.
  *
  * Returns:
  *   none
 **/
-void UnionFind::addLink(int a, int b)
+void UnionFind::addArc(const int a, const int b)
 {
-    int whatever;
-    int which;
+    std::vector<Arc>::iterator it;
+    Arc arcToAdd = Arc(a, b);
 
-    Arc thisValue;
-    Arc rootOfSmaller;
+    if( this->isArcUnique(arcToAdd) ) {
+        this->arcs.push_back(arcToAdd);
+    }
 
-    if(a <= b)
-    {
-        which = a;
-        whatever = b;
-    }
-    
-    else
-    {
-        which = b;
-        whatever = a;
-    }
-    
-    Arc whichNode = nodes[which];
-    
-    if(whichNode.getX() == DUMMYX)
-    {
-        nodes[which].setX(which);
-        nodes[which].setY(which);
-    }
-    
-    Arc someNode = nodes[whatever];
-    
-    if(someNode.getX() == DUMMYX)
-    {
-        nodes[whatever].setX(whatever);
-        nodes[whatever].setY(whatever);
-    }
-    
-    rootOfSmaller = this->find(which);
-    
-    thisValue = this->find(whatever);
-    
-    if(rootOfSmaller.equals(thisValue))
-    {
-        Arc tempNode;
-        
-        tempNode.setX(whatever);
-        tempNode.setY(which);
-        
-        Utils::logStream << tempNode.toString() << endl;
-        Utils::logStream << this->frabjous(which, whatever) << endl;
-        Utils::logStream.flush();
-    }
-    
-    else
-    {
-        Arc tempNode;
-        
-        tempNode.setX(whatever);
-        tempNode.setY(which);
-        
-        Utils::logStream << tempNode.toString() << endl;
-        Utils::logStream.flush();
-        
-        nodes[whatever].setY(which);
-    }
-    
-    Utils::logStream << TAG << endl;
-    Utils::logStream << this->toString();
-    Utils::logStream.flush();
+    //Implicit else:
+    //Ignore the Arc if it's not unique.
 }
+
+
+bool UnionFind::isArcUnique(const Arc arcToAdd)
+{
+    std::vector<Arc>::iterator it;
+
+    for(it = this->arcs.begin(); it != this->arcs.end(); it++)
+    {
+        //Duplicate detected! This arc is NOT unique.
+        if( (arcToAdd.a == it->a) && (arcToAdd.b == it->b) )
+        {
+            return false;
+        }
+    }
+
+    //Otherwise, no duplicates detected, so this Arc is unique.
+    return true;
+}
+
+
 /****************************************************************
  * Function that finds the holy grail.
  *
  * Returns:
  *   root
 **/
-Arc UnionFind::find(int zz)
+/*Arc UnionFind::find(int zz)
 {
     Arc root;
         
@@ -113,13 +81,15 @@ Arc UnionFind::find(int zz)
     root = this->find(zz, nodePath);
         
     return root;
-}
+}*/
+
+
 /****************************************************************
  * Function that finds root and places in vector.
  * Returns:
  *   root
 **/
-Arc UnionFind::find(int zz, vector<Arc>& nodePath)
+/*Arc UnionFind::find(int zz, vector<Arc>& nodePath)
 {
     Arc root;
 
@@ -137,14 +107,16 @@ Arc UnionFind::find(int zz, vector<Arc>& nodePath)
     }
 
     return root;
-}
+}*/
+
+
 /****************************************************************
  * Function that returns string data of UnionFind.
  *
  * Returns:
  *   string value.
 **/
-string UnionFind::frabjous(int which, int whatever)
+/*string UnionFind::frabjous(int which, int whatever)
 {
     string s = "";
     
@@ -183,14 +155,16 @@ string UnionFind::frabjous(int which, int whatever)
     Utils::logStream.flush();
     
     return s;
-}
+}*/
+
+
 /****************************************************************
  * Function for returning a 'toString' of the data in the class.
  * Here we return vector of the zork whatever.
  * Returns:
  *   string of ZORK data.
 **/
-string UnionFind::toString()
+/*string UnionFind::toString()
 {
     string s = "";
     
@@ -208,14 +182,16 @@ string UnionFind::toString()
     }
     
     return s;
-}
+}*/
+
+
 /****************************************************************
  * Function for returning a 'toString' of the data in the class.
  * Here we return vector of the zork whatever.
  * Returns:
  *   string of ZORK data.
 **/
-string UnionFind::toStringZORK(vector<Arc> path, Arc last)
+/*string UnionFind::toStringZORK(vector<Arc> path, Arc last)
 {
     string s = "";
     
@@ -226,4 +202,4 @@ string UnionFind::toStringZORK(vector<Arc> path, Arc last)
     }
     
     return s;
-}
+}*/

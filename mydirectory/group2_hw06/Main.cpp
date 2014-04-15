@@ -78,9 +78,13 @@ int main(int argc, char *argv[])
 //        cout << "ZORK " << a << " " << b << endl;
         
         if(a < b)
-            unionFind.addLink(a, b);
+        {
+            unionFind.addArc(a, b);
+        }
         else
-            unionFind.addLink(b, a);
+        {
+            unionFind.addArc(b, a);
+        }
     }
 
 //    Utils::logStream << unionFind.toString() << endl;

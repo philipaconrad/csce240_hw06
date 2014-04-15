@@ -10,6 +10,7 @@
 #ifndef ARC_H
 #define ARC_H
 
+#include <algorithm> //Provides std::unique
 #include "../../Utilities/Utils.h"
 #include "../../Utilities/Scanner.h"
 
@@ -29,7 +30,7 @@ public:
  * General functions.
 **/
 
-    bool equals(Arc that);
+    //bool equals(Arc that);
     string toString();
 
 

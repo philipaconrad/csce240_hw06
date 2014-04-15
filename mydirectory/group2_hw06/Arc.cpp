@@ -35,7 +35,7 @@ Arc::~Arc()
  * Returns:
  *   boolean value
 **/
-bool Arc::equals(Arc that)
+/*bool Arc::equals(Arc that)
 {
     if((this->a == that.a()) && (this->b == that.b()))
     {
@@ -43,7 +43,7 @@ bool Arc::equals(Arc that)
     }
 
     return false;
-}
+}*/
 
 
 /****************************************************************
