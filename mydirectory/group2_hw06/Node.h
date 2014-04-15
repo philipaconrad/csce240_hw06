@@ -6,8 +6,8 @@
  * Used by: Allen Bates, Phillip Conrad, Janice Neighbor, 
  * William Warren
 **/
-#ifndef X_H
-#define X_H
+#ifndef NODE_H
+#define NODE_H
 
 #include "../../Utilities/Utils.h"
 #include "../../Utilities/Scanner.h"
@@ -17,21 +17,16 @@ class Node
 public:
 
 /****************************************************************
- * Constructors and destructors for the class. 
+ * Constructors and destructors for the class.
 **/
-  Node(int ID);
-  virtual ~Node();
-
-/****************************************************************
- * General functions.
-**/
-  int getID();
+    Node(int ID);
+    virtual ~Node();
   
 /****************************************************************
- * General private variables.
+ * Public variables.
 **/
-private:
-  int parent;
+    int id;
+    int parent;
 };
 
-#endif // X_H
+#endif // NODE_H

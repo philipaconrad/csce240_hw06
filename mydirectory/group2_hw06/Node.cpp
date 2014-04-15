@@ -13,24 +13,14 @@
 **/
 Node::Node(int ID)
 {
-    this->parent = ID;
+    this->id = ID;
+    this->parent = 0;
 }
+
 
 /****************************************************************
  * Destructor.
 **/
 Node::~Node()
 {
-    
 }
-/****************************************************************
- * Accessor function for value of x
- *
- * Returns:
- *   int value of x.
-**/
-int Node::getID()
-{
-    return this->parent;
-}
-

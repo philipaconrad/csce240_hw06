@@ -7,14 +7,12 @@
  * William Warren
 **/
 
-#ifndef X_H
-#define X_H
+#ifndef ARC_H
+#define ARC_H
 
 #include "../../Utilities/Utils.h"
 #include "../../Utilities/Scanner.h"
 
-#define DUMMYX -1
-#define DUMMYY -2
 
 class Arc
 {
@@ -23,29 +21,24 @@ public:
 /****************************************************************
  * Constructors and destructors. 
 **/
-    Arc();
+    Arc(int a, int b);
     virtual ~Arc();
-    
+
+
 /****************************************************************
  * General functions.
 **/
-    int getX();
-    int getY();
-    
-    void setX(int value);
-    void setY(int value);
-    
-    bool equals(Arc that);
-    bool z();
 
+    bool equals(Arc that);
     string toString();
-    
-private:
+
+
 /****************************************************************
- * Private variables.
+ * Public variables.
 **/
-    int x;
-    int y;
+    int a;
+    int b;
+
 };
 
 #endif // X_H
