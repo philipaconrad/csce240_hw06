@@ -12,9 +12,11 @@
 
 #include <map>
 #include <vector>
+#include <set>
 #include "../../Utilities/Utils.h"
 #include "../../Utilities/Scanner.h"
 #include "Arc.h"
+#include "Node.h"
 
 class UnionFind
 {
@@ -32,6 +34,9 @@ public:
 **/
     void addArc(const int a, const int b);
     bool isArcUnique(const Arc arcToAdd);
+
+    void buildForest(const vector<Arc>& nodes);
+
     void dumpTrees();
 
     //Arc find(int startNodeID);
@@ -45,8 +50,8 @@ private:
  * Private functions.
 **/
     vector<Arc> arcs;
-    
-    map<int, Arc> nodes;
+    set<int> ids;    
+    vector<Node> nodes;
 
     //string frabjous(int Arc, int yy);
     //string toStringZORK(vector<Arc> path, Arc last);
