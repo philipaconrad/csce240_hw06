@@ -47,8 +47,7 @@ int Arc::getY()
     return this->y;
 }
 /****************************************************************
- * Function compare Arcs and see if they are equal.
- * If so, returns boolean of true, else returns false.
+ * Mutator function for value of x.
  *
  * Returns:
  *   none
@@ -58,8 +57,7 @@ void Arc::setX(int value)
     this->x = value;
 }
 /****************************************************************
- * Function compare Arcs and see if they are equal.
- * If so, returns boolean of true, else returns false.
+ * Mutator function for value of y.
  *
  * Returns:
  *   none
