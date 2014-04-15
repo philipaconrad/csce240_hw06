@@ -24,3 +24,19 @@ Node::Node(int ID)
 Node::~Node()
 {
 }
+
+
+/****************************************************************
+ * Function for returning a string representation of a Node.
+ * Returns:
+ *   string representation of the Node.
+**/
+string Node::toString()
+{
+    string s = "";
+    
+    s += "(" + Utils::Format(this->id, 3) + " -> ";
+    s += Utils::Format(this->parent, 3) + ")";
+    
+    return s;
+}

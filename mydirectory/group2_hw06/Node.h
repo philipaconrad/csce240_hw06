@@ -21,12 +21,20 @@ public:
 **/
     Node(int ID);
     virtual ~Node();
+
+
+/****************************************************************
+ * General functions.
+**/
+    string toString();
+
   
 /****************************************************************
  * Public variables.
 **/
     int id;
     int parent;
+
 };
 
 #endif // NODE_H
