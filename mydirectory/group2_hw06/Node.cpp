@@ -11,8 +11,9 @@
 /****************************************************************
  * Constructor.
 **/
-Node::Node()
+Node::Node(int ID)
 {
+  this->parent = ID;
 }
 
 /****************************************************************
@@ -22,46 +23,8 @@ Node::~Node()
 {
     
 }
-/****************************************************************
- * Accessor function for value of x
- *
- * Returns:
- *   int value of x.
-**/
-int Node::getID()
-{
-    return this->id;
-}
 
-void Node::setID(int newId)
+void Node::getID()
 {
-   this->id = newId;
-}
-
-
-string toStringEdges()
-{
- string s = "";
-    for(int i = 0; i < this->edges.length; i++)
-    {
-        s += edges[i];
-        s += ", ";
-    }
-
- return s;
-}
-/****************************************************************
- * Function for returning a 'toString' of the data in the class.
- * Here we return the Arc data in string format.
- * Returns:
- *   string of Arc data.
-**/
-string Arc::toString()
-{
-    string s = "";
-    
-    s += "(" + Utils::Format(this->getX(), 3) + " -> ";
-    s += Utils::Format(this->getY(), 3) + ")";
-    
-    return s;
+  return this->parent;
 }

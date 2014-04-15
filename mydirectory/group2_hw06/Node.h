@@ -19,23 +19,17 @@ public:
 /****************************************************************
  * Constructors and destructors for the class. 
 **/
-  Node();
+  Node(int ID);
   virtual ~Node();
 
 /****************************************************************
  * General functions.
 **/
-  int getID();
-  void setID(int newId);
 
-  string toString();
-  string toStringEdges();
+  void getID();
+  int parent;
 /****************************************************************
  * General private variables.
 **/
-private:
-  int id;
-  vector<int> edges;
-};
 
 #endif // X_H
