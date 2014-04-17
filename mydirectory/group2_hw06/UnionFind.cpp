@@ -1,126 +1,120 @@
 /****************************************************************
-Header for the 'UnionFind' class.
+* 'UnionFind' class.
 *
 * Author/copyright: Duncan Buell
 * Date: 24 April 2014
-* Used by: Allen Bates, Phillip Conrad, Janice Neighbor,
+* Used by: Allan Bates, Phillip Conrad, Janice Neighbor,
 * William Warren
 **/
+
 #include "UnionFind.h"
 
 static const string TAG = "UnionFind: ";
+
+
 /****************************************************************
 * Constructor.
 **/
 UnionFind::UnionFind()
 {
 }
+
+
 /****************************************************************
 * Destructor.
 **/
 UnionFind::~UnionFind()
 {
 }
+
+
 /****************************************************************
 * Function add links and do voodoo magic.
 *
 * Returns:
 * none
 **/
-void UnionFind::addLink(int a, int b)
+void UnionFind::addArc(const int a, const int b)
 {
-int firstNode;
-int secondNode;
+    std::vector<Arc>::iterator it;
+    Arc arcToAdd = Arc(a, b);
 
-Arc thisValue;
-Arc rootOfSmaller;
+    if( this->isArcUnique(arcToAdd) ) {
+        this->arcs.push_back(arcToAdd);
+    }
 
-if(a <= b)
-{
-  secondNode = a;
-  firstNode = b;
+    //Implicit else:
+    //Ignore the Arc if it's not unique.
 }
 
-else
+
+bool UnionFind::isArcUnique(const Arc arcToAdd)
 {
-  secondNode = b;
-  firstNode = a;
+    std::vector<Arc>::iterator it;
+
+    for(it = this->arcs.begin(); it != this->arcs.end(); it++)
+    {
+        //Duplicate detected! This arc is NOT unique.
+        if( (arcToAdd.a == it->a) && (arcToAdd.b == it->b) )
+        {
+            return false;
+        }
+    }
+
+    //Otherwise, no duplicates detected, so this Arc is unique.
+    return true;
 }
 
-Arc whichNode = nodes[secondNode];
 
-if(whichNode.getX() == DUMMYX)
+//Function for building the initial forest of Nodes.
+void UnionFind::buildForest(const vector<Arc>& nodes)
 {
-  nodes[secondNode].setX(secondNode);
-  nodes[secondNode].setY(secondNode);
+    std::vector<Arc>::iterator it_arc;
+    std::set<int>::iterator it_ids;
+    Node nodeToAdd = Node(0); //May need to add a default initializer later to clean this up.
+
+    //For each Arc, add that Arc's 'a' and 'b' members to the set of Node ids.
+    for(it_arc = this->arcs.begin(); it_arc != this->arcs.end(); it_arc++)
+    {
+        this->ids.insert(it_arc->a); //Add 1st id in the Arc.
+        this->ids.insert(it_arc->b); //Add 2nd id in the Arc.
+    }
+
+    //For each id in the set of node ids, build a Node and add it to the
+    //list of Nodes.
+    for(it_ids = this->ids.begin(); it_ids != this->ids.end(); it_ids++)
+    {
+        //Create a Node with the current ID, and make it its own parent.
+        nodeToAdd = Node(*it_ids);
+        nodeToAdd.parent = *it_ids;
+
+        //Add the Node to the forest (the list of Nodes).
+        this->nodes.push_back(nodeToAdd);
+    }
 }
 
-Arc someNode = nodes[ firstNode];
 
-if(someNode.getX() == DUMMYX)
-{
-  nodes[firstNode].setX(firstNode);
-  nodes[firstNode].setY(firstNode);
-}
-
-rootOfSmaller = this->find(secondNode);
-thisValue = this->find(firstNode);
-
-if(rootOfSmaller.equals(thisValue))
-{
-  Arc tempNode;
-  tempNode.setX(firstNode);
-  tempNode.setY(secondNode);
-  Utils::logStream << tempNode.toString() << endl;
-  Utils::logStream << this->frabjous(secondNode, firstNode) << endl;
-  Utils::logStream.flush();
-}
-
-else
-{
-  Arc tempNode;
-  tempNode.setX(firstNode);
-  tempNode.setY(secondNode);
-  Utils::logStream << tempNode.toString() << endl;
-  Utils::logStream.flush();
-  nodes[firstNode].setY(secondNode);
-}
-
-Utils::logStream << TAG << endl;
-Utils::logStream << this->toString();
-Utils::logStream.flush();
-}
 /****************************************************************
 * Function that finds the holy grail.
 *
 * Returns:
 * root
 **/
-Arc UnionFind::find(int zz)
+/*Arc UnionFind::find(int zz)
 {
 Arc root;
-map<int, Arc>::iterator iter;
-int index;
-
-for(iter = nodes.begin(); iter != nodes.end(); ++iter)
-{
-    index = (iter->first);
-    if(index == zz)
-    {
-        root = nodes[index];
-    }
-}
-
-//vector<Arc> nodePath;
-//root = this->find(zz, nodePath);
+vector<Arc> nodePath;
+root = this->find(zz, nodePath);
 return root;
-}
+}*/
+
+
 /****************************************************************
 * Function that finds root and places in vector.
 * Returns:
 * root
 **/
-Arc UnionFind::find(int zz, vector<Arc>& nodePath)
+/*Arc UnionFind::find(int zz, vector<Arc>& nodePath)
 {
 Arc root;
 
@@ -130,42 +124,22 @@ if(root.getX() != root.getY())
 {
 while(root.getX() != root.getY())
 {
-  root = nodes[root.getY()];
-  nodePath.push_back(root);
+root = nodes[root.getY()];
+nodePath.push_back(root);
 }
 }
 
 return root;
-}
-/****************************************************************
-<<<<<<< HEAD
-*The find function should return an arc based on id of the nodes 
-*
-*
-**/
-Arc UnionFind::find(map<int, Node> theNodes, int Id)
-{
+}*/
 
-}
-
-/*****************************************************************
-*The union function should make an arc between nodes depending on
-*any relative edges 
-*
-**/
-Arc UnionFind::union(map<int, Node> theNodes, tuple<int, int> edges)
-{
-}
 
 /****************************************************************
-=======
->>>>>>> 0d17097dc4f266e1732e04dd028763e2b7c9fa1c
 * Function that returns string data of UnionFind.
 *
 * Returns:
 * string value.
 **/
-string UnionFind::frabjous(int which, int whatever)
+/*string UnionFind::frabjous(int which, int whatever)
 {
 string s = "";
 Arc thisValue, rootOfSmaller;
@@ -186,19 +160,23 @@ Arc topOfLarger = *itLarger;
 Arc tempNode;
 tempNode.setX(whatever);
 tempNode.setY(which);
-Utils::logStream << TAG << "PATH ONE " << tempNode.toString() << this->toStringZORK(pathSmaller, *itSmaller) << endl;
+Utils::logStream << TAG << "PATH ONE " << tempNode.toString()
+<< this->toStringZORK(pathSmaller, *itSmaller) << endl;
 Utils::logStream.flush();
-Utils::logStream << TAG << "PATH TWO " << this->toStringZORK(pathLarger, *itLarger) << endl << endl;
+Utils::logStream << TAG << "PATH TWO " << this->toStringZORK(pathLarger, *itLarger)
+<< endl << endl;
 Utils::logStream.flush();
 return s;
-}
+}*/
+
+
 /****************************************************************
 * Function for returning a 'toString' of the data in the class.
 * Here we return vector of the zork whatever.
 * Returns:
 * string of ZORK data.
 **/
-string UnionFind::toString()
+/*string UnionFind::toString()
 {
 string s = "";
 map<int, Arc>::iterator it;
@@ -210,20 +188,22 @@ Arc node = this->find(usu, path);
 s += this->toStringZORK(path, node) + "\n";
 }
 return s;
-}
+}*/
+
+
 /****************************************************************
 * Function for returning a 'toString' of the data in the class.
 * Here we return vector of the zork whatever.
 * Returns:
 * string of ZORK data.
 **/
-string UnionFind::toStringZORK(vector<Arc> path, Arc last)
+/*string UnionFind::toStringZORK(vector<Arc> path, Arc last)
 {
 string s = "";
 for(vector<Arc>::iterator it = path.end(); it != path.begin(); --it)
 {
 s += (*it).toString();
-if( (*it).equals(last)) break;
+if((*it).equals(last)) break;
 }
 return s;
-}
+}*/

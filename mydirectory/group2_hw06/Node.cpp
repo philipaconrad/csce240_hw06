@@ -1,30 +1,48 @@
 /****************************************************************
- *'Node' class.
- *
- * Author/copyright:  Duncan Buell
- * Date: 24 April 2014
- * Used by: Allan Bates, Phillip Conrad, Janice Neighbor, 
- * William Warren
+*'Node' class.
+*
+* Author/copyright: Duncan Buell
+* Date: 24 April 2014
+* Used by: Allan Bates, Phillip Conrad, Janice Neighbor,
+* William Warren
 **/
 #include "Node.h"
 
 /****************************************************************
- * Constructor.
+* Constructor.
 **/
-Node::Node(int ID)
+Node::Node()
 {
-  this->parent = ID;
+    this->id = 0;
+    this->parent = 0;
 }
 
+Node::Node(int ID)
+{
+    this->id = ID;
+    this->parent = ID;
+}
+
+
 /****************************************************************
- * Destructor.
+* Destructor.
 **/
 Node::~Node()
 {
-    
 }
 
-void Node::getID()
+
+/****************************************************************
+* Function for returning a string representation of a Node.
+* Returns:
+* string representation of the Node.
+**/
+string Node::toString()
 {
-  return this->parent;
+    string s = "";
+    
+    s += "(" + Utils::Format(this->id, 3) + " -> ";
+    s += Utils::Format(this->parent, 3) + ")";
+    
+    return s;
 }
