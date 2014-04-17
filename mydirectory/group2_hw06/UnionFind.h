@@ -18,6 +18,7 @@
 #include "Arc.h"
 #include "Node.h"
 
+
 class UnionFind
 {
 
@@ -35,23 +36,25 @@ public:
     void addArc(const int a, const int b);
     bool isArcUnique(const Arc arcToAdd);
 
-    void buildForest(const vector<Arc>& nodes);
+    void buildForest();
 
     void dumpTrees();
 
-    //Arc find(int startNodeID);
-    //Arc find(int startNodeID, vector<Arc>& nodePath); //Not needed yet.
+    Node find(int currentNodeID, vector<Arc>& prevArcs);
+    void addArcToForest(Arc arcToAdd);
+    void unionFind();
 
     string toString();
 
 
-private:
 /****************************************************************
  * Private functions.
 **/
     vector<Arc> arcs;
-    set<int> ids;    
-    vector<Node> nodes;
+    set<int> ids;
+    map<int, Node> nodes;
+    vector<Arc> pathA;
+    vector<Arc> pathB;
 
     //string frabjous(int Arc, int yy);
     //string toStringZORK(vector<Arc> path, Arc last);

@@ -77,15 +77,21 @@ int main(int argc, char *argv[])
         
 //        cout << "ZORK " << a << " " << b << endl;
         
-        if(a < b)
+        /*if(a < b)
         {
             unionFind.addArc(a, b);
         }
         else
         {
             unionFind.addArc(b, a);
-        }
+        }*/
+        unionFind.addArc(a, b);
     }
+
+    unionFind.buildForest();
+
+    unionFind.unionFind();
+
 
 //    Utils::logStream << unionFind.toString() << endl;
 //    Utils::logStream.flush();

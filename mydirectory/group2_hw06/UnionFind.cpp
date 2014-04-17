@@ -1,6 +1,13 @@
 /****************************************************************
  * 'UnionFind' class.
  *
+ * CLEANUP NOTICE:
+ *  - This file is **HIDEOUSLY** ugly. There's some serious patching-up 
+ *    to be done. Also, the indexing convetion MUST be standardized.
+ *
+ *    I get correct outputs for zin1 - zin3, but I'll have to check zin4 
+ *    by hand.
+ *
  * Author/copyright:  Duncan Buell
  * Date: 24 April 2014
  * Used by: Allan Bates, Phillip Conrad, Janice Neighbor, 
@@ -67,11 +74,12 @@ bool UnionFind::isArcUnique(const Arc arcToAdd)
 
 
 //Function for building the initial forest of Nodes.
-void UnionFind::buildForest(const vector<Arc>& nodes)
+void UnionFind::buildForest()
 {
     std::vector<Arc>::iterator it_arc;
     std::set<int>::iterator it_ids;
-    Node nodeToAdd = Node(0); //May need to add a default initializer later to clean this up.
+    int curID;
+    Node nodeToAdd;
 
     //For each Arc, add that Arc's 'a' and 'b' members to the set of Node ids.
     for(it_arc = this->arcs.begin(); it_arc != this->arcs.end(); it_arc++)
@@ -85,149 +93,103 @@ void UnionFind::buildForest(const vector<Arc>& nodes)
     for(it_ids = this->ids.begin(); it_ids != this->ids.end(); it_ids++)
     {
         //Create a Node with the current ID, and make it its own parent.
-        nodeToAdd = Node(*it_ids);
-        nodeToAdd.parent = *it_ids;
+        curID = *it_ids;
+
+        nodeToAdd = Node(curID);
+        //nodeToAdd.parent = curID;
 
         //Add the Node to the forest (the list of Nodes).
-        this->nodes.push_back(nodeToAdd);
+        this->nodes[curID] = nodeToAdd;
     }
 }
 
 
-/****************************************************************
- * Function that finds the holy grail.
- *
- * Returns:
- *   root
-**/
-/*Arc UnionFind::find(int zz)
+//Basic 'find' function.
+Node UnionFind::find(int currentNodeID, vector<Arc>& prevArcs)
 {
-    Arc root;
-        
-    vector<Arc> nodePath;
-        
-    root = this->find(zz, nodePath);
-        
-    return root;
-}*/
+    Node currentNode = this->nodes[currentNodeID];
 
-
-/****************************************************************
- * Function that finds root and places in vector.
- * Returns:
- *   root
-**/
-/*Arc UnionFind::find(int zz, vector<Arc>& nodePath)
-{
-    Arc root;
-
-    root = nodes[zz];
-    
-    nodePath.push_back(root);
-    
-    if(root.getX() != root.getY())
+    //This node is the root of a tree!
+    if(currentNode.parent == currentNodeID)
     {
-        while(root.getX() != root.getY())
+        //DEBUG-KEEP: cout << "  base case: " << currentNodeID << "\n";
+        prevArcs.push_back(Arc(currentNodeID, currentNode.parent));
+        return currentNode;
+    }
+    //Else, keep recursing up the tree. We'll hit the root sooner or later.
+    else
+    {
+        //DEBUG-KEEP: cout << "  recursing from " << currentNodeID << " to " << currentNode.parent << "\n";
+        prevArcs.push_back(Arc(currentNodeID, currentNode.parent));
+        return find(currentNode.parent, prevArcs);
+    }
+}
+
+
+//The actual union-find algorithm:
+void UnionFind::addArcToForest(Arc arcToAdd)
+{
+    //Reset these vectors so we can store the memoized paths in them.
+    this->pathA.clear();
+    this->pathB.clear();
+
+    //Find the root of each node's owning tree.
+    Node rootA = find(arcToAdd.a, this->pathA);
+    Node rootB = find(arcToAdd.b, this->pathB);
+    //DEBUG-KEEP: cout << rootA.id << "  ";
+    //DEBUG-KEEP: cout << rootB.id << "\n";
+
+    Node temp;
+    std::vector<Arc>::iterator it_pathA;
+    std::vector<Arc>::iterator it_pathB;
+
+    //If both roots are the same, we've got a cycle!
+    if(rootA.id == rootB.id)
+    {
+        cout << "CYCLE DETECTED!\n";
+
+        //Dump cycle path A.
+        cout << "  A: ";
+        for(it_pathA =  this->pathA.begin();
+            it_pathA != this->pathA.end();
+            it_pathA++)
         {
-            root = nodes[root.getY()];
-            nodePath.push_back(root);
+            cout << it_pathA->toString();
         }
+
+        cout << "\n";
+
+        //Dump cycle path B.
+        cout << "  B: ";
+        for(it_pathB =  this->pathB.begin();
+            it_pathB != this->pathB.end();
+            it_pathB++)
+        {
+            cout << it_pathB->toString();
+        }
+
+        cout << "\n";
+
+        //Dump arc causing cycle.
+        cout << "  Bad Arc: " << arcToAdd.toString() << "\n";
     }
-
-    return root;
-}*/
-
-
-/****************************************************************
- * Function that returns string data of UnionFind.
- *
- * Returns:
- *   string value.
-**/
-/*string UnionFind::frabjous(int which, int whatever)
-{
-    string s = "";
-    
-    Arc thisValue, rootOfSmaller;
-    
-    vector<Arc> pathSmaller, pathLarger;
-    
-    rootOfSmaller = this->find(which, pathSmaller);
-    
-    thisValue = this->find(whatever, pathLarger);
-    
-    vector<Arc>::iterator itSmaller = pathSmaller.end();
-    vector<Arc>::iterator itLarger = pathLarger.end();
-    
-    --itSmaller;
-    --itLarger;
-    
-    while( (*itSmaller).equals( (*itLarger) ))
+    //The roots differ. It is therefore safe to add this arc.
+    else
     {
-        --itSmaller;
-        --itLarger;
+        this->nodes[arcToAdd.b].parent = arcToAdd.a;
     }
-    
-    Arc topOfSmaller = *itSmaller;
-    Arc topOfLarger = *itLarger;
-    Arc tempNode;
-    
-    tempNode.setX(whatever);
-    tempNode.setY(which);
-    
-    Utils::logStream << TAG << "PATH ONE " << tempNode.toString()
-                     << this->toStringZORK(pathSmaller, *itSmaller) << endl;
-    Utils::logStream.flush();
-    Utils::logStream << TAG << "PATH TWO " << this->toStringZORK(pathLarger, *itLarger)
-                     << endl << endl;
-    Utils::logStream.flush();
-    
-    return s;
-}*/
+}
 
 
-/****************************************************************
- * Function for returning a 'toString' of the data in the class.
- * Here we return vector of the zork whatever.
- * Returns:
- *   string of ZORK data.
-**/
-/*string UnionFind::toString()
+//Runs the union-find algorithm across all the input arcs.
+void UnionFind::unionFind()
 {
-    string s = "";
-    
-    map<int, Arc>::iterator it;
-    
-    for(it = this->nodes.begin(); it != this->nodes.end(); ++it)
-    {
-        vector<Arc> path;
-        
-        int usu = it->first;
-        
-        Arc node = this->find(usu, path);
-        
-        s += this->toStringZORK(path, node) + "\n";
-    }
-    
-    return s;
-}*/
+    std::vector<Arc>::iterator it;
 
-
-/****************************************************************
- * Function for returning a 'toString' of the data in the class.
- * Here we return vector of the zork whatever.
- * Returns:
- *   string of ZORK data.
-**/
-/*string UnionFind::toStringZORK(vector<Arc> path, Arc last)
-{
-    string s = "";
-    
-    for(vector<Arc>::iterator it = path.end(); it != path.begin(); --it)
+    for(it = this->arcs.begin(); it != this->arcs.end(); it++)
     {
-        s += (*it).toString();
-        if((*it).equals(last)) break;
+        //cout << "ADDING PATH!\n";
+        this->addArcToForest(*it);
     }
-    
-    return s;
-}*/
+}
+
