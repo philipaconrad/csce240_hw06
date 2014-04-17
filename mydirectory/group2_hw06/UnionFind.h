@@ -42,7 +42,7 @@ public:
     //Arc find(int startNodeID);
     //Arc find(int startNodeID, vector<Arc>& nodePath); //Not needed yet.
 
-    string toString();
+    // string toString();
 
 
 private:
@@ -54,7 +54,7 @@ private:
     vector<Node> nodes;
 
     //string frabjous(int Arc, int yy);
-    //string toStringZORK(vector<Arc> path, Arc last);
+    string toStringPath(vector<Arc> path, Arc last);
 };
 
 #endif // UNIONFIND_H

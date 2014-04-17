@@ -55,8 +55,8 @@ string Arc::toString()
 {
     string s = "";
     
-    s += "(" + Utils::Format(this->a, 3) + " -> ";
-    s += Utils::Format(this->b, 3) + ")";
+    s += "(" + Utils::Format(this->b, 3) + " -> ";
+    s += Utils::Format(this->a, 3) + ")";
     
     return s;
 }
