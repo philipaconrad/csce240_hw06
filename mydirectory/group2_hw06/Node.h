@@ -19,6 +19,7 @@ public:
 /****************************************************************
  * Constructors and destructors for the class.
 **/
+    Node();
     Node(int ID);
     virtual ~Node();
 

@@ -11,10 +11,16 @@
 /****************************************************************
  * Constructor.
 **/
+Node::Node()
+{
+    this->id = 0;
+    this->parent = 0;
+}
+
 Node::Node(int ID)
 {
     this->id = ID;
-    this->parent = 0;
+    this->parent = ID;
 }
 
 
