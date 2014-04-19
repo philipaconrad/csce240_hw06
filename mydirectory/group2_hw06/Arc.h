@@ -33,7 +33,7 @@ public:
     //bool equals(Arc that);
     string toString();
 
-
+    friend ostream& operator <<(ostream& outputStream, const Arc& arc); 
 /****************************************************************
 * Public variables.
 **/

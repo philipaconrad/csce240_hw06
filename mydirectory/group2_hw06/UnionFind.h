@@ -13,6 +13,7 @@
 #include <map>
 #include <vector>
 #include <set>
+#include <iostream>
 #include "../../Utilities/Utils.h"
 #include "../../Utilities/Scanner.h"
 #include "Arc.h"
@@ -35,26 +36,34 @@ public:
     void addArc(const int a, const int b);
     bool isArcUnique(const Arc arcToAdd);
 
-    void buildForest(const vector<Arc>& nodes);
+    void buildForest();
 
     void dumpTrees();
 
+    Node find(int currentNodeID, vector<Arc>& prevArcs);
+    void addArcToForest(Arc arcToAdd);
+    void unionFind();
+
+    string toString();
     //Arc find(int startNodeID);
     //Arc find(int startNodeID, vector<Arc>& nodePath); //Not needed yet.
 
-    // string toString();
+   // friend ostream& operator <<(ostream& outputStream, const Arc& arc);
+
 
 
 private:
 /****************************************************************
-* Private functions.
+* Private variables.
 **/
     vector<Arc> arcs;
     set<int> ids;
-    vector<Node> nodes;
 
+    map<int, Node> nodes;
+    vector<Arc> pathA; 
+    vector<Arc> pathB;
     //string frabjous(int Arc, int yy);
-    string toStringPath(vector<Arc> path, Arc last);
+    
 };
 
 #endif // UNIONFIND_H
