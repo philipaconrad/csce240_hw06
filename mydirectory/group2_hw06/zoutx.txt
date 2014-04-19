@@ -1,0 +1,21 @@
+
+TIME***********************************************************************
+TIME CPU percent    0.00   0.00                    Thu Apr 17 17:03:51 2014
+TIME beginning             0.00 u         0.00 s   Res:        2788
+TIME beginning             0.00 u_t       0.00 s_t
+TIME***********************************************************************
+
+
+Main: Beginning execution
+Main: infile 'zin1.txt'
+Main: outfile 'zlogx.txt'
+Main: logfile 'zoutx.txt'
+
+TIME***********************************************************************
+TIME CPU percent    0.00   0.00                    Thu Apr 17 17:03:51 2014
+TIME ending                0.00 u         0.00 s   Res:        2788
+TIME ending                0.00 u_t       0.00 s_t
+TIME***********************************************************************
+
+
+Main: Ending execution

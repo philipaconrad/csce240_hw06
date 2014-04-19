@@ -3,7 +3,7 @@
  *
  * Author/copyright:  Duncan Buell. All rights reserved.
  * Date: 12 January 2014
- * Used by: Allan Bates, Phillip Conrad, Janice Neighbor, 
+ * Edited by: Allan Bates, Phillip Conrad, Janice Neighbor, 
  * William Warren
 **/
 
@@ -45,28 +45,6 @@ int main(int argc, char *argv[])
     Utils::logStream << TAG << "outfile '" << outFileName << "'" << endl;
     Utils::logStream << TAG << "logfile '" << logFileName << "'" << endl;
 
-/*
-    srand(1);
-    
-    int count = 20;
-    
-    for(int i = 0; i < 100; ++i)
-    {
-        int a = rand() % count;
-        int b = rand() % count;
-        
-        while(a == b)
-        {
-            b = rand() % count;
-        }
-
-        Utils::logStream << Utils::Format(a, 3) << " "
-                         << Utils::Format(b, 3) << endl;
-        Utils::logStream.flush();
-    }
-    
-    exit(1);
-*/
 
     inStream.openFile(inFileName);
     int numberOfArcs = inStream.nextInt();
@@ -75,31 +53,12 @@ int main(int argc, char *argv[])
         int a = inStream.nextInt();
         int b = inStream.nextInt();
         
-//        cout << "ZORK " << a << " " << b << endl;
-        
-        /*if(a < b)
-        {
-            unionFind.addArc(a, b);
-        }
-        else
-        {
-            unionFind.addArc(b, a);
-        }*/
         unionFind.addArc(a, b);
     }
 
     unionFind.buildForest();
 
     unionFind.unionFind();
-
-
-//    Utils::logStream << unionFind.toString() << endl;
-//    Utils::logStream.flush();
-
-//    unionFind.buildTrees();
-
-//    Utils::logStream << unionFind.toString() << endl;
-//    Utils::logStream.flush();
 
     timeCallOutput = Utils::timecall("ending");
     Utils::logStream << timeCallOutput;
