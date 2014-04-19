@@ -166,8 +166,8 @@ void UnionFind::addArcToForest(Arc arcToAdd)
 
         //Dump arc causing cycle.
         
-        cout << " Bad Arc: " << arcToAdd.toString() << "\n";
-        //cout << " Bad Arc: " << arcToAdd << "\n";
+       // cout << " Bad Arc: " << arcToAdd.toString() << "\n";
+        cout << " Bad Arc: " << arcToAdd << "\n";
     }
     //The roots differ. It is therefore safe to add this arc.
     else
