@@ -3,7 +3,7 @@
  *
  * Author/copyright:  Duncan Buell
  * Date: 24 April 2014
- * Used by: Allen Bates, Phillip Conrad, Janice Neighbor, 
+ * Edited by: Allen Bates, Phillip Conrad, Janice Neighbor, 
  * William Warren
 **/
 #ifndef NODE_H

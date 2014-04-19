@@ -3,7 +3,7 @@
  *
  * Author/copyright:  Duncan Buell
  * Date: 24 April 2014
- * Used by: Allan Bates, Phillip Conrad, Janice Neighbor, 
+ * Edited by: Allan Bates, Phillip Conrad, Janice Neighbor, 
  * William Warren
 **/
 
@@ -56,8 +56,6 @@ public:
     vector<Arc> pathA;
     vector<Arc> pathB;
 
-    //string frabjous(int Arc, int yy);
-    //string toStringZORK(vector<Arc> path, Arc last);
 };
 
 #endif // UNIONFIND_H

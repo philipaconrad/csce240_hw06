@@ -1,16 +1,16 @@
 /****************************************************************
  * 'UnionFind' class.
- *
- * CLEANUP NOTICE:
- *  - This file is **HIDEOUSLY** ugly. There's some serious patching-up 
- *    to be done. Also, the indexing convetion MUST be standardized.
- *
- *    I get correct outputs for zin1 - zin3, but I'll have to check zin4 
- *    by hand.
+ * This class file implements the union find algorithm. It tests 
+ * arcs for uniqueness and adds to the vector container if it is 
+ * unique. Once added, builds the forest of nodes and makes node its
+ * own parent and adds node to the list. Function then finds if node
+ * is its own parent and if so, sets as root, otherwise it recurses up 
+ * the tree. UnionFind algorithm is then run and cycles are detected 
+ * across all inputs.
  *
  * Author/copyright:  Duncan Buell
  * Date: 24 April 2014
- * Used by: Allan Bates, Phillip Conrad, Janice Neighbor, 
+ * Edited by: Allan Bates, Phillip Conrad, Janice Neighbor, 
  * William Warren
 **/
 
@@ -36,7 +36,9 @@ UnionFind::~UnionFind()
 
 
 /****************************************************************
- * Function add links and do voodoo magic.
+ * Function add arcs by calling isArcUnique and testing. If 
+ * isArcUnique returns true then function is added to the vector. 
+ * if arc is not unique due to implicit else, it is ignored.
  *
  * Returns:
  *   none
@@ -49,31 +51,42 @@ void UnionFind::addArc(const int a, const int b)
     if( this->isArcUnique(arcToAdd) ) {
         this->arcs.push_back(arcToAdd);
     }
-
-    //Implicit else:
-    //Ignore the Arc if it's not unique.
-}
+}//void UnionFind::addArc(const int a, const int b)
 
 
+/****************************************************************
+ * Boolean function to test if an arc is unique. If arc is not 
+ * unique then returns false. If arc is unique returns true.
+ *
+ * Returns:
+ *   boolean
+**/
 bool UnionFind::isArcUnique(const Arc arcToAdd)
 {
     std::vector<Arc>::iterator it;
 
     for(it = this->arcs.begin(); it != this->arcs.end(); it++)
     {
-        //Duplicate detected! This arc is NOT unique.
         if( (arcToAdd.a == it->a) && (arcToAdd.b == it->b) )
         {
             return false;
         }
     }
 
-    //Otherwise, no duplicates detected, so this Arc is unique.
     return true;
-}
+}//bool UnionFind::isArcUnique(const Arc arcToAdd)
 
 
-//Function for building the initial forest of Nodes.
+/****************************************************************
+ * Function declares iterator over vector and set containers.
+ * Adds arcs a and b members to the set of node ids by iterating 
+ * through the vector and inserting. Also iterates over set and 
+ * creates a node with the current node, setting as own parent. 
+ * Adds node to the list of nodes, or forest.
+ *
+ * Returns:
+ *   none
+**/
 void UnionFind::buildForest()
 {
     std::vector<Arc>::iterator it_arc;
@@ -81,69 +94,80 @@ void UnionFind::buildForest()
     int curID;
     Node nodeToAdd;
 
-    //For each Arc, add that Arc's 'a' and 'b' members to the set of Node ids.
     for(it_arc = this->arcs.begin(); it_arc != this->arcs.end(); it_arc++)
     {
         this->ids.insert(it_arc->a); //Add 1st id in the Arc.
         this->ids.insert(it_arc->b); //Add 2nd id in the Arc.
     }
 
-    //For each id in the set of node ids, build a Node and add it to the 
-    //list of Nodes.
+    
     for(it_ids = this->ids.begin(); it_ids != this->ids.end(); it_ids++)
     {
         //Create a Node with the current ID, and make it its own parent.
         curID = *it_ids;
 
         nodeToAdd = Node(curID);
-        //nodeToAdd.parent = curID;
 
         //Add the Node to the forest (the list of Nodes).
         this->nodes[curID] = nodeToAdd;
     }
-}
+}//void UnionFind::buildForest()
 
 
-//Basic 'find' function.
+/****************************************************************
+ * Function finds if the current node is at the root of the tree.
+ * If node id is found to match the parent, node is set as root and 
+ * returns current node. If not, function recurses up the tree to 
+ * find root and then returns the parent and all previous arcs.
+ *
+ * Returns:
+ *   Node
+**/
 Node UnionFind::find(int currentNodeID, vector<Arc>& prevArcs)
 {
     Node currentNode = this->nodes[currentNodeID];
 
-    //This node is the root of a tree!
+    
     if(currentNode.parent == currentNodeID)
     {
-        //DEBUG-KEEP: cout << "  base case: " << currentNodeID << "\n";
         prevArcs.push_back(Arc(currentNodeID, currentNode.parent));
         return currentNode;
     }
-    //Else, keep recursing up the tree. We'll hit the root sooner or later.
+    
     else
     {
-        //DEBUG-KEEP: cout << "  recursing from " << currentNodeID << " to " << currentNode.parent << "\n";
         prevArcs.push_back(Arc(currentNodeID, currentNode.parent));
         return find(currentNode.parent, prevArcs);
     }
-}
+}//Node UnionFind::find(int currentNodeID, vector<Arc>& prevArcs)
 
 
-//The actual union-find algorithm:
+/****************************************************************
+ * Function resets vectors in order to store paths in them. Finds
+ * the root of each node's owning tree and initializes iterator.
+ * If rootA and rootB are the same then there is a cycle. Dumps
+ * the cycle path of root A and B and also dumps the bad arcs path.
+ * If no cycle path is detected, the roots are different and thus 
+ * no cycle is found and deemed safe to add arc.
+ *
+ * Returns:
+ *   none
+**/
 void UnionFind::addArcToForest(Arc arcToAdd)
 {
-    //Reset these vectors so we can store the memoized paths in them.
+    
     this->pathA.clear();
     this->pathB.clear();
 
-    //Find the root of each node's owning tree.
+    
     Node rootA = find(arcToAdd.a, this->pathA);
     Node rootB = find(arcToAdd.b, this->pathB);
-    //DEBUG-KEEP: cout << rootA.id << "  ";
-    //DEBUG-KEEP: cout << rootB.id << "\n";
-
+  
     Node temp;
     std::vector<Arc>::iterator it_pathA;
     std::vector<Arc>::iterator it_pathB;
 
-    //If both roots are the same, we've got a cycle!
+   
     if(rootA.id == rootB.id)
     {
         cout << "CYCLE DETECTED!\n";
@@ -170,26 +194,30 @@ void UnionFind::addArcToForest(Arc arcToAdd)
 
         cout << "\n";
 
-        //Dump arc causing cycle.
+        
         cout << "  Bad Arc: " << arcToAdd.toString() << "\n";
     }
-    //The roots differ. It is therefore safe to add this arc.
+    
     else
     {
         this->nodes[arcToAdd.b].parent = arcToAdd.a;
     }
-}
+}//void UnionFind::addArcToForest(Arc arcToAdd)
 
 
-//Runs the union-find algorithm across all the input arcs.
+/****************************************************************
+ * Function runs the union-find algorithm across all input arcs.
+ *
+ * Returns:
+ *   none
+**/
 void UnionFind::unionFind()
 {
     std::vector<Arc>::iterator it;
 
     for(it = this->arcs.begin(); it != this->arcs.end(); it++)
     {
-        //cout << "ADDING PATH!\n";
         this->addArcToForest(*it);
     }
-}
+}//void UnionFind::unionFind()
 

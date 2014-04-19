@@ -1,9 +1,10 @@
 /****************************************************************
  *'Node' class.
- *
+ * Creates Node object with int values and returns string of Node.
+ 
  * Author/copyright:  Duncan Buell
  * Date: 24 April 2014
- * Used by: Allan Bates, Phillip Conrad, Janice Neighbor, 
+ * Edited by: Allan Bates, Phillip Conrad, Janice Neighbor, 
  * William Warren
 **/
 #include "Node.h"
