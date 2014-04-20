@@ -140,28 +140,32 @@ void UnionFind::addArcToForest(Arc arcToAdd)
 
         //Dump cycle path A.
         cout << " A: ";
-        for(it_pathA = this->pathA.begin();
+        /* for(it_pathA = this->pathA.begin();
             it_pathA != this->pathA.end();
             it_pathA++)
         {
             cout << it_pathA->toString() << endl;
-        }
+        }*/
 
-        /*for(unsigned int i = 0; i < this->pathA.size(); i++)
+        for(unsigned int i = 0; i < this->pathA.size(); i++)
         {
             cout << this->pathA[i] << endl;
-        }*/
+        }
         cout << "\n";
 
         //Dump cycle path B.
         cout << " B: ";
-        for(it_pathB = this->pathB.begin();
+        /*for(it_pathB = this->pathB.begin();
             it_pathB != this->pathB.end();
             it_pathB++)
         {
             cout << it_pathB->toString();
+        }*/
+        
+        for(unsigned int i = 0; i < this->pathB.size(); i++)
+        {
+            cout << this->pathB[i] << endl;
         }
-
         cout << "\n";
 
         //Dump arc causing cycle.
