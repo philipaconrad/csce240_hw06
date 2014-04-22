@@ -8,9 +8,10 @@ Arc = Arc.o
 S = Scanner.o
 U = Utils.o
 N = Node.o
+O = Operators.o
 
-union-find: $(M) $(UF) $(Arc) $(S) $(U) $(N)
-	$(GPP) -o union-find $(M) $(UF) $(Arc) $(S) $(U) $(N)
+union-find: $(M) $(UF) $(Arc) $(S) $(U) $(N) $(O)
+	$(GPP) -o union-find $(M) $(UF) $(Arc) $(S) $(U) $(N) $(O)
 
 Main.o: Main.h Main.cpp
 	$(GPP) -o Main.o -c -DEBUG Main.cpp
@@ -29,6 +30,9 @@ Utils.o: $(UTILS)/Utils.h $(UTILS)/Utils.cpp
 
 Node.o: Node.h Node.cpp
 	$(GPP) -o Node.o -c Node.cpp
+
+Operators.o: Operators.cpp
+	$(GPP) -o Operators.o -c Operators.cpp
 
 clean:
 	rm union-find

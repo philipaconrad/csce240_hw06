@@ -28,9 +28,9 @@ public:
 /****************************************************************
  * General functions.
 **/
-
-    //bool equals(Arc that);
     string toString();
+
+    friend ostream& operator <<(ostream& outputStream, Arc& arc);
 
 
 /****************************************************************
