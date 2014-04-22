@@ -1,9 +1,11 @@
 /****************************************************************
  * 'Arc' class implementation.
+ * Creates Arc object with int values, returns string representation
+ * of Arc data.
  *
  * Author/copyright:  Duncan Buell
  * Date: 24 April 2014
- * Used by: Allan Bates, Phillip Conrad, Janice Neighbor, 
+ * Edited by: Allan Bates, Phillip Conrad, Janice Neighbor, 
  * William Warren
 **/
 
@@ -26,24 +28,6 @@ Arc::Arc(int a, int b)
 Arc::~Arc()
 {
 }
-
-
-/****************************************************************
- * Function compare Arcs and see if they are equal.
- * If so, returns boolean of true, else returns false.
- *
- * Returns:
- *   boolean value
-**/
-/*bool Arc::equals(Arc that)
-{
-    if((this->a == that.a()) && (this->b == that.b()))
-    {
-        return true;
-    }
-
-    return false;
-}*/
 
 
 /****************************************************************
