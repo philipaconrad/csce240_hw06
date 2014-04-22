@@ -45,6 +45,8 @@ int main(int argc, char *argv[])
     Utils::logStream << TAG << "outfile '" << outFileName << "'" << endl;
     Utils::logStream << TAG << "logfile '" << logFileName << "'" << endl;
 
+    
+
 /*
 srand(1);
 int count = 20;
@@ -63,7 +65,6 @@ Utils::logStream.flush();
 }
 exit(1);
 */
-
     inStream.openFile(inFileName);
     int numberOfArcs = inStream.nextInt();
     for(int arc = 0; arc < numberOfArcs; ++arc)
@@ -72,17 +73,14 @@ exit(1);
         int b = inStream.nextInt();
         
 // cout << "ZORK " << a << " " << b << endl;
-        
-        if(a < b)
-        {
             unionFind.addArc(a, b);
-        }
-        else
-        {
-            unionFind.addArc(b, a);
-        }
     }
-
+    
+    unionFind.buildForest();
+   
+    unionFind.unionFind();
+    
+    outStream << unionFind.toString();
 // Utils::logStream << unionFind.toString() << endl;
 // Utils::logStream.flush();
 
