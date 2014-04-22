@@ -15,19 +15,21 @@ At the start, every node is the root of its own tree. This changes once we start
 
 ## Our Implementation
 
-We use a recursive function in our code, `union()`, that is responsible for adding arcs to the graph, and for detecting (and *not* adding) arcs that would generate a cycle.
+We use a recursive function in our code, `unionFind()`, that is responsible for adding arcs to the graph, and for detecting (and *not* adding) arcs that would generate a cycle.
 
 
 ## Build
 
-To build hw6, just run `make`.
+To build hw6, just run `make` in the top level directory.
+
+If you want to package this homework for submission to the CSE Dropbox, run `make package`.
 
 
 ## Test
 
 To run hw6 manually, use:
 
-    ./hw6 xin1.txt xlog.txt xout.txt
+    ./union-find xin1.txt xlog.txt xout.txt
 
 To run hw6 on the provided test data, just run `make test`.
 

@@ -10,30 +10,16 @@ O = Operators.o
 S = Scanner.o
 U = Utils.o
 
-Aprog: $(M) $(F) $(MAT) $(O) $(S) $(U)
-	$(GPP) -o Aprog $(M) $(F) $(MAT) $(O) $(S) $(U)
 
-Main.o: Main.h Main.cpp
-	$(GPP) -o Main.o -c -DEBUG Main.cpp
+all: build package
 
-PathFinder.o: PathFinder.h PathFinder.cpp
-	$(GPP) -o PathFinder.o -c -DEBUGPATH PathFinder.cpp
+build:
+	$(MAKE) -C src/
 
-Matrix.o: Matrix.h Matrix.cpp
-#	$(GPP) -o Matrix.o -c -DEBUGMATRIX Matrix.cpp
-	$(GPP) -o Matrix.o -c Matrix.cpp
-
-Operators.o: Operators.cpp
-#	$(GPP) -o Matrix.o -c -DEBUGOPERATORS Operators.cpp
-	$(GPP) -o Operators.o -c Operators.cpp
-
-Scanner.o: $(UTILS)/Scanner.h $(UTILS)/Scanner.cpp
-	$(GPP) -o Scanner.o -c $(UTILS)/Scanner.cpp
-
-Utils.o: $(UTILS)/Utils.h $(UTILS)/Utils.cpp
-	$(GPP) -o Utils.o -c $(UTILS)/Utils.cpp
+package:
+	tar -cvf targroup2_hw06 ../csce240_hw06
+	gzip -f targroup2_hw06
 
 clean:
-	rm Aprog
-	clean
+	$(MAKE) -C src/ clean
 

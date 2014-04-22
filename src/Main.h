@@ -10,8 +10,8 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-#include "../../Utilities/Utils.h"
-#include "../../Utilities/Scanner.h"
+#include "../Utilities/Utils.h"
+#include "../Utilities/Scanner.h"
 #include "UnionFind.h"
 
 using namespace std;

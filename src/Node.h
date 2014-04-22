@@ -9,8 +9,8 @@
 #ifndef NODE_H
 #define NODE_H
 
-#include "../../Utilities/Utils.h"
-#include "../../Utilities/Scanner.h"
+#include "../Utilities/Utils.h"
+#include "../Utilities/Scanner.h"
 
 class Node
 {

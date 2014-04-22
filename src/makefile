@@ -1,6 +1,6 @@
 GPP = g++ -O3 -Wall
 
-UTILS = ../../Utilities
+UTILS = ../Utilities
 
 M = Main.o
 UF = UnionFind.o
@@ -9,8 +9,8 @@ S = Scanner.o
 U = Utils.o
 N = Node.o
 
-Aprog: $(M) $(UF) $(Arc) $(S) $(U) $(N)
-	$(GPP) -o Aprog $(M) $(UF) $(Arc) $(S) $(U) $(N)
+union-find: $(M) $(UF) $(Arc) $(S) $(U) $(N)
+	$(GPP) -o union-find $(M) $(UF) $(Arc) $(S) $(U) $(N)
 
 Main.o: Main.h Main.cpp
 	$(GPP) -o Main.o -c -DEBUG Main.cpp
@@ -31,6 +31,6 @@ Node.o: Node.h Node.cpp
 	$(GPP) -o Node.o -c Node.cpp
 
 clean:
-	rm Aprog
+	rm union-find
 	clean
 

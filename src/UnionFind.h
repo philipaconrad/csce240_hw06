@@ -13,8 +13,8 @@
 #include <map>
 #include <vector>
 #include <set>
-#include "../../Utilities/Utils.h"
-#include "../../Utilities/Scanner.h"
+#include "../Utilities/Utils.h"
+#include "../Utilities/Scanner.h"
 #include "Arc.h"
 #include "Node.h"
 

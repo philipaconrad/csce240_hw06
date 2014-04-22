@@ -11,8 +11,8 @@
 #define ARC_H
 
 #include <algorithm> //Provides std::unique
-#include "../../Utilities/Utils.h"
-#include "../../Utilities/Scanner.h"
+#include "../Utilities/Utils.h"
+#include "../Utilities/Scanner.h"
 
 
 class Arc
