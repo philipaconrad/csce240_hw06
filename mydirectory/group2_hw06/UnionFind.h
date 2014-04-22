@@ -44,7 +44,7 @@ public:
     void addArcToForest(Arc arcToAdd);
     void unionFind();
 
-    string toString();
+//    string toString();
     //Arc find(int startNodeID);
     //Arc find(int startNodeID, vector<Arc>& nodePath); //Not needed yet.
 

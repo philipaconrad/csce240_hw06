@@ -136,47 +136,29 @@ void UnionFind::addArcToForest(Arc arcToAdd)
     //If both roots are the same, we've got a cycle!
     if(rootA.id == rootB.id)
     {
-        cout << "CYCLE DETECTED!\n";
         Utils::logStream << "CYCLE DETECTED!" << endl;
-        //Dump cycle path A.
-        cout << " A: ";
+        //Dump cycle path A.   
         Utils::logStream << " A: ";
-        /* for(it_pathA = this->pathA.begin();
-            it_pathA != this->pathA.end();
-            it_pathA++)
-        {
-            cout << it_pathA->toString() << endl;
-        }*/
 
         for(unsigned int i = 0; i < this->pathA.size(); i++)
         {
-            cout << this->pathA[i] << endl;
             Utils::logStream << this->pathA[i] << endl;
         }
-        cout << "\n";
+
         Utils::logStream << "\n";
 
         //Dump cycle path B.
-        cout << " B: ";
+       
         Utils::logStream << " A: ";
-        /*for(it_pathB = this->pathB.begin();
-            it_pathB != this->pathB.end();
-            it_pathB++)
-        {
-            cout << it_pathB->toString();
-        }*/
-        
+         
         for(unsigned int i = 0; i < this->pathB.size(); i++)
         {
-            cout << this->pathB[i] << endl;
             Utils::logStream << this->pathB[i] << endl;
         }
-        cout << "\n";
+    
         Utils::logStream << "\n";
         //Dump arc causing cycle.
         
-       // cout << " Bad Arc: " << arcToAdd.toString() << "\n";
-        cout << " Bad Arc: " << arcToAdd << "\n";
         Utils::logStream << " Bad Arc: " << arcToAdd << endl;
     }
     //The roots differ. It is therefore safe to add this arc.
@@ -194,19 +176,8 @@ void UnionFind::unionFind()
 
     for(it = this->arcs.begin(); it != this->arcs.end(); it++)
     {
-        //cout << "ADDING PATH!\n";
+      //  Utils::logStream << "ADDING PATH!\n";
+
         this->addArcToForest(*it);
     }
-}
-
-/****************************************************************
-* Function for returning a 'toString' of the data in the class.
-* Here we return vector of the zork whatever.
-* Returns:
-* string data.
-**/
-string UnionFind::toString()
-{
-  string s = "";
-  return s;
 }
