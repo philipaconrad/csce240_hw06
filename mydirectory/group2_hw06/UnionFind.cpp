@@ -136,29 +136,39 @@ void UnionFind::addArcToForest(Arc arcToAdd)
     //If both roots are the same, we've got a cycle!
     if(rootA.id == rootB.id)
     {
+        output += "CYCLE DETECTED!\n";
         Utils::logStream << "CYCLE DETECTED!" << endl;
+
         //Dump cycle path A.   
+        output += " A: ";
         Utils::logStream << " A: ";
 
         for(unsigned int i = 0; i < this->pathA.size(); i++)
         {
+            output += this->pathA[i].toString();
+            output += "\n";
             Utils::logStream << this->pathA[i] << endl;
         }
-
+        output += "\n";
         Utils::logStream << "\n";
 
         //Dump cycle path B.
-       
-        Utils::logStream << " A: ";
+        output += " B: ";
+        Utils::logStream << " B: ";
          
         for(unsigned int i = 0; i < this->pathB.size(); i++)
         {
+            output += this->pathB[i].toString();
+            output += "\n";
             Utils::logStream << this->pathB[i] << endl;
         }
-    
+        output += "\n";
         Utils::logStream << "\n";
         //Dump arc causing cycle.
-        
+        output += " Bad Arc: ";
+        output += arcToAdd.toString();
+        output += "\n";
+
         Utils::logStream << " Bad Arc: " << arcToAdd << endl;
     }
     //The roots differ. It is therefore safe to add this arc.
@@ -180,4 +190,10 @@ void UnionFind::unionFind()
 
         this->addArcToForest(*it);
     }
+}
+
+//toString function
+string UnionFind::toString()
+{ 
+  return output;
 }
