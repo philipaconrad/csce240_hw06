@@ -48,13 +48,14 @@ public:
 
 
 /****************************************************************
- * Private functions.
+ * Public variables.
 **/
     vector<Arc> arcs;
     set<int> ids;
     map<int, Node> nodes;
     vector<Arc> pathA;
     vector<Arc> pathB;
+    string output;
 
 };
 

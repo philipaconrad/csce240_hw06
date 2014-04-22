@@ -31,7 +31,6 @@ To run hw6 manually, use:
 
     ./union-find xin1.txt xlog.txt xout.txt
 
-To run hw6 on the provided test data, just run `make test`.
 
 
 ## License

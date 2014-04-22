@@ -171,34 +171,43 @@ void UnionFind::addArcToForest(Arc arcToAdd)
    
     if(rootA.id == rootB.id)
     {
-        cout << "CYCLE DETECTED!\n";
+        this->output     += "CYCLE DETECTED!\n";
+        Utils::logStream << "CYCLE DETECTED!" << endl;
 
         //Dump cycle path A.
-        cout << "  A: ";
+        this->output     += "A: ";
+        Utils::logStream << "A: ";
+
         for(it_pathA =  this->pathA.begin();
             it_pathA != this->pathA.end();
             it_pathA++)
         {
-            cout << it_pathA->toString();
+            this->output     += it_pathA->toString();
+            Utils::logStream << *it_pathA;
         }
 
-        cout << "\n";
+        this->output     += "\n";
+        Utils::logStream << "\n";
 
         //Dump cycle path B.
-        cout << "  B: ";
+        this->output     += "B: ";
+        Utils::logStream << "B: ";
+
         for(it_pathB =  this->pathB.begin();
             it_pathB != this->pathB.end();
             it_pathB++)
         {
-            cout << it_pathB->toString();
+            this->output     += it_pathB->toString();
+            Utils::logStream << *it_pathB;
         }
 
-        cout << "\n";
+        this->output     += "\n";
+        Utils::logStream << "\n";
 
         
-        cout << "  Bad Arc: " << arcToAdd.toString() << "\n";
+        this->output     += "Bad Arc: "  + arcToAdd.toString()  + "\n";
+        Utils::logStream << "Bad Arc: " << arcToAdd.toString() << "\n";
     }
-    
     else
     {
         this->nodes[arcToAdd.b].parent = arcToAdd.a;
@@ -220,5 +229,18 @@ void UnionFind::unionFind()
     {
         this->addArcToForest(*it);
     }
+}
+
+
+/****************************************************************
+ * Function for returning a string representation of a UnionFind 
+ * instance.
+ *
+ * Returns:
+ *   string representation of the UnionFind.
+**/
+string UnionFind::toString()
+{
+  return output;
 }
 

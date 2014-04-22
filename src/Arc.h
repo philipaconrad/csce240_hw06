@@ -32,7 +32,6 @@ public:
 
     friend ostream& operator <<(ostream& outputStream, Arc& arc);
 
-
 /****************************************************************
  * Public variables.
 **/
