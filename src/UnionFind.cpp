@@ -1,11 +1,12 @@
 /****************************************************************
  * 'UnionFind' class.
- * This class file implements the union find algorithm. It tests 
+ *
+ * This class file implements the Union-Find algorithm. It tests 
  * arcs for uniqueness and adds to the vector container if it is 
  * unique. Once added, builds the forest of nodes and makes node its
  * own parent and adds node to the list. Function then finds if node
  * is its own parent and if so, sets as root, otherwise it recurses up 
- * the tree. UnionFind algorithm is then run and cycles are detected 
+ * the tree. Union-Find algorithm is then run and cycles are detected 
  * across all inputs.
  *
  * Author/copyright:  Duncan Buell
@@ -51,7 +52,7 @@ void UnionFind::addArc(const int a, const int b)
     if( this->isArcUnique(arcToAdd) ) {
         this->arcs.push_back(arcToAdd);
     }
-}//void UnionFind::addArc(const int a, const int b)
+}
 
 
 /****************************************************************
@@ -74,7 +75,7 @@ bool UnionFind::isArcUnique(const Arc arcToAdd)
     }
 
     return true;
-}//bool UnionFind::isArcUnique(const Arc arcToAdd)
+}
 
 
 /****************************************************************
@@ -111,7 +112,7 @@ void UnionFind::buildForest()
         //Add the Node to the forest (the list of Nodes).
         this->nodes[curID] = nodeToAdd;
     }
-}//void UnionFind::buildForest()
+}
 
 
 /****************************************************************
@@ -139,7 +140,7 @@ Node UnionFind::find(int currentNodeID, vector<Arc>& prevArcs)
         prevArcs.push_back(Arc(currentNodeID, currentNode.parent));
         return find(currentNode.parent, prevArcs);
     }
-}//Node UnionFind::find(int currentNodeID, vector<Arc>& prevArcs)
+}
 
 
 /****************************************************************
@@ -202,7 +203,7 @@ void UnionFind::addArcToForest(Arc arcToAdd)
     {
         this->nodes[arcToAdd.b].parent = arcToAdd.a;
     }
-}//void UnionFind::addArcToForest(Arc arcToAdd)
+}
 
 
 /****************************************************************
@@ -219,5 +220,5 @@ void UnionFind::unionFind()
     {
         this->addArcToForest(*it);
     }
-}//void UnionFind::unionFind()
+}
 

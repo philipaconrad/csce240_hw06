@@ -1,5 +1,5 @@
 /****************************************************************
- * Header file for Homework 6, the union-find algorithm.
+ * Header file for Homework 6, the Union-Find algorithm.
  *
  * Author/copyright:  Duncan Buell
  * Date: 24 April 2014
@@ -16,6 +16,7 @@
 
 using namespace std;
 
+
 class Main
 {
 
@@ -26,7 +27,6 @@ public:
     int main();
     virtual ~Main();
 
-private:
 };
 
 #endif // MAIN_H

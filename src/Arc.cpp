@@ -1,5 +1,6 @@
 /****************************************************************
  * 'Arc' class implementation.
+ *
  * Creates Arc object with int values, returns string representation
  * of Arc data.
  *

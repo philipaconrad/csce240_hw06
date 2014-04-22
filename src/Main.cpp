@@ -9,12 +9,14 @@
 
 #include "Main.h"
 
+
 static const string TAG = "Main: ";
+
 
 int main(int argc, char *argv[])
 {
     string timeCallOutput = "";
-    string inFileName = "";
+    string inFileName  = "";
     string outFileName = "";
     string logFileName = "";
     
@@ -28,7 +30,7 @@ int main(int argc, char *argv[])
 
     Utils::CheckArgs(3, argc, argv, "infilename outfilename logfilename");
     
-    inFileName = (string) argv[1];
+    inFileName  = (string) argv[1];
     outFileName = (string) argv[2];
     logFileName = (string) argv[3];
 
@@ -41,7 +43,7 @@ int main(int argc, char *argv[])
     Utils::logStream << TAG << "Beginning execution" << endl;
     Utils::logStream.flush();
 
-    Utils::logStream << TAG << "infile '" << inFileName << "'" << endl;
+    Utils::logStream << TAG << "infile '"  << inFileName  << "'" << endl;
     Utils::logStream << TAG << "outfile '" << outFileName << "'" << endl;
     Utils::logStream << TAG << "logfile '" << logFileName << "'" << endl;
 

@@ -1,7 +1,8 @@
 /****************************************************************
  *'Node' class.
+ *
  * Creates Node object with int values and returns string of Node.
- 
+ *
  * Author/copyright:  Duncan Buell
  * Date: 24 April 2014
  * Edited by: Allan Bates, Phillip Conrad, Janice Neighbor, 
@@ -10,7 +11,10 @@
 #include "Node.h"
 
 /****************************************************************
- * Constructor.
+ * Constructors.
+ *
+ * The first is provided as a default, the second constructor is 
+ * the one meant for actual use in the Union-Find algorithm.
 **/
 Node::Node()
 {
@@ -35,6 +39,7 @@ Node::~Node()
 
 /****************************************************************
  * Function for returning a string representation of a Node.
+ *
  * Returns:
  *   string representation of the Node.
 **/
