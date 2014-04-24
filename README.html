@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+body {
+    color: #444;
+    background-color: #eee;
+    font-family: 'Cabin', sans-serif;
+}
+.invis { color: #666; text-decoration: none; }
+.invis:hover { color: #666; text-decoration: none; }
+h1 { font-size: 22pt; font-weight: 600; text-align:center; padding-bottom:5px; }
+h2 { font-size: 18pt; }
+h3 { font-size: 14pt; padding-bottom:5px; }
+h4 { font-size: 10pt; text-align:center; }
+p  { font-size: 12pt; font-weight: 400; padding-bottom:5px;}
+ul { margin-left:15px; margin-top:5px; list-style-type:square; }
+li { margin-bottom:5px; line-height:23px;}
+a { color: #b22222; text-decoration: none; }
+a:hover {
+    color: #ffd700;
+    text-decoration: underline; 
+    text-shadow: 0 0 5px #000000;
+}
+.main {
+    width: 370px;
+    margin: 0 auto;
+    margin-top: 40px;
+    margin-bottom: 75px;
+    padding: 8px;
+}
+</style>
+</head>
+<body class="main">
+<h1>csce240_hw6</h1>
+<p>Homework 6 is designed to demonstrate the Union-Find algorithm.</p>
+<h2>The Algorithm</h2>
+<p>The Union-Find algorithm allows one to generate a list of the cycles in a given graph, which, when unioned together, will give all of the unique cycles present in the graph.</p>
+<p>This algorithm has a particularly neat property: context/state of previous cycles doesn&#39;t have to be retained in order to find the unique cycles.</p>
+<p>At the start, every node is the root of its own tree. This changes once we start adding arcs, however, since each time we add in an arc, we reparent a node.</p>
+<h2>Our Implementation</h2>
+<p>We use a recursive function in our code, <code>unionFind()</code>, that is responsible for adding arcs to the graph, and for detecting (and <em>not</em> adding) arcs that would generate a cycle.</p>
+<h2>Build</h2>
+<p>To build hw6, just run <code>make</code> in the top level directory.</p>
+<p>If you want to package this homework for submission to the CSE Dropbox, run <code>make package</code>.</p>
+<p>The <strong>extra credit</strong> code (prints only minimal cycle) is not built in by default. To enable it and see the trimmed output, see the makefile in the <code>src</code> directory.</p>
+<h2>Test</h2>
+<p>To run hw6 manually, use:</p>
+<pre><code>./union-find xin1.txt xlog.txt xout.txt</code></pre>
+<h2>License</h2>
+<p>This code, should it ever appear to the public, is released under the <a href="http://choosealicense.com/licenses/mit/">MIT License</a>.</p>
+</body>
+</html>

@@ -167,7 +167,7 @@ void UnionFind::addArcToForest(Arc arcToAdd)
     //Find the root of each node's tree.
     Node rootA = find(arcToAdd.a, this->pathA);
     Node rootB = find(arcToAdd.b, this->pathB);
-  
+
     //Iterators for printing the paths out later. (In the event 
     //of a cycle).
     std::vector<Arc>::iterator it_pathA;
@@ -178,6 +178,26 @@ void UnionFind::addArcToForest(Arc arcToAdd)
     {
         this->output     += "CYCLE DETECTED!\n";
         Utils::logStream << "CYCLE DETECTED!" << endl;
+
+        //Extra credit -- Print only the minimal cycle.
+        //This requires running through both path vectors and eliminating dupes.
+        //The code is enabled by defining EXTRA_CREDIT, or by passing GCC the 
+        // -DEXTRA_CREDIT directive on the command line.
+#ifdef EXTRA_CREDIT
+        while(true)
+        {
+            if(this->pathA.back().a == this->pathB.back().a &&
+               this->pathA.back().b == this->pathB.back().b)
+            {
+                this->pathA.pop_back();
+                this->pathB.pop_back();
+            }
+            else
+            {
+                break;
+            }
+        }
+#endif
 
         //Dump cycle path A.
         this->output     += "A: ";

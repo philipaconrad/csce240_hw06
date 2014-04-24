@@ -11,14 +11,14 @@ S = Scanner.o
 U = Utils.o
 
 
-all: build package
+all: build
 
 build:
 	$(MAKE) -C src/
 
 package:
-	tar -cvf targroup2_hw06 ../csce240_hw06
-	gzip -f targroup2_hw06
+	tar -cvf ../targroup2_hw06 ../csce240_hw06
+	gzip -f ../targroup2_hw06
 
 clean:
 	$(MAKE) -C src/ clean

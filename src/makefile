@@ -16,8 +16,13 @@ union-find: $(M) $(UF) $(Arc) $(S) $(U) $(N) $(O)
 Main.o: Main.h Main.cpp
 	$(GPP) -o Main.o -c -DEBUG Main.cpp
 
+
+#The Extra-Credit code can be enabled by swapping which line 
+#below is commented out.
 UnionFind.o: UnionFind.h UnionFind.cpp
+	#$(GPP) -o UnionFind.o -c -DEXTRA_CREDIT UnionFind.cpp
 	$(GPP) -o UnionFind.o -c UnionFind.cpp
+
 
 Arc.o: Arc.h Arc.cpp
 	$(GPP) -o Arc.o -c Arc.cpp
@@ -36,5 +41,5 @@ Operators.o: Operators.cpp
 
 clean:
 	rm union-find
-	clean
+	rm *.o
 

@@ -24,6 +24,8 @@ To build hw6, just run `make` in the top level directory.
 
 If you want to package this homework for submission to the CSE Dropbox, run `make package`.
 
+The **extra credit** code (prints only minimal cycle) is not built in by default. To enable it and see the trimmed output, see the makefile in the `src` directory.
+
 
 ## Test
 
